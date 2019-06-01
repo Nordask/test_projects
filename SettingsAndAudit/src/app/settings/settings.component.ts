@@ -25,7 +25,7 @@ export class SettingsComponent implements OnInit {
       type: "string"
     }
     console.log(this.sendFetchService.sendData(this.settingsData));
-    window.location.reload();
+    //window.location.reload();
   }  
 
   ngOnInit() {
@@ -33,7 +33,7 @@ export class SettingsComponent implements OnInit {
   }
 
   fetchSettingsData() {
-    this.sendFetchService.fetchData().subscribe(
+    this.sendFetchService.fetchData('settings').subscribe(
       (data) => {
         this.message = null;
         //this.people = Object.values(data.headers);

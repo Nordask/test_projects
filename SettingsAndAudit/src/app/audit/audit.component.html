@@ -1,7 +1,27 @@
 <div>
-    <div>
-      <button class="btn btn-success">Add</button>
-      <button class="btn btn-danger">Remove</button>
-      <button class="btn btn-primary">Update</button>
-    </div>  
+  <table>
+    <thead>
+      <th><input /></th>
+      <th><input /></th>
+      <th><input /></th>
+      <th><input /></th>
+      <th><input /></th>
+    </thead>
+    <thead>
+      <th>Дата и время</th>
+      <th>Хост</th>
+      <th>Событие</th>
+      <th>Комментарий</th>
+      <th>Результат</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let audit of listOfAudit">
+        <td>{{audit.dateTime}}</td>
+        <td>{{audit.host}}</td>
+        <td>{{audit.event}}</td>
+        <td>{{audit.description}}</td>
+        <td>{{audit.result}}</td>
+      </tr>
+    </tbody>
+  </table> 
 </div>

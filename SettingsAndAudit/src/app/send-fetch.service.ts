@@ -10,7 +10,7 @@ export class SendFetchService {
 
   constructor(private http: HttpClient) {}
 
-  sendData(data:Settings | Audit): Observable<Object> {
+  sendData(data:Settings | Audit)/*: Observable<Object>*/ {
     const body = data;
     let headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -31,10 +31,18 @@ export class SendFetchService {
     xmlHttp.send(JSON.stringify(data));
   }
 
-  fetchData(): Observable<Object> { 
+  fetchData(fileName: string): Observable<Object> { 
     //---------------------get data-----------------------------------------------
-    
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, file, POST, GET",
+      /*'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, GET,PUT,POST,DELETE,PATCH,OPTIONS',*/
+      'file': fileName}); 
+    let options = {headers: headers};
+    const params = new HttpParams().set('file', fileName);
+    //console.log(params);
+
     return this.http
-               .get<Settings[]|Audit[]>('http://localhost:3000/get');
+               .get<Settings[]|Audit[]>('http://localhost:3000/get', {params: params});
   }
 }

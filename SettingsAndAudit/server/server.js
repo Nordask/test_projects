@@ -10,8 +10,16 @@ var urlencodedParser = bodyParser.urlencoded({extended: false});
 
 app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  res.header('Access-Control-Allow-Methods', 'POST');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, file');
+  res.header('Access-Control-Allow-Methods', 'POST,GET');
+  
+ /*
+  response.setHeader("Access-Control-Allow-Origin", "*");
+  response.setHeader("Access-Control-Allow-Credentials", "true");
+  response.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+  response.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, Authorization, file");
+  */
+  //res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
   next();
 });
 
@@ -52,7 +60,10 @@ app.post('/post', (req, res) => {
 
 app.get('/get', (req, res) => {
   console.log('Got request for data');
-  fs.readFile('data/settings.json', 'utf8', (err, data) => {
+  //console.log(req.originalUrl);
+  console.log(req.query);
+  let fileName = req.query.file;
+  fs.readFile(`data/${fileName}.json`, 'utf8', (err, data) => {
     if(err) {
       console.log(err);
       throw err;
