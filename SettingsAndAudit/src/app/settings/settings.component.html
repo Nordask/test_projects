@@ -1,0 +1,25 @@
+<div>
+  <div>
+    <button class="btn btn-success" (click)="sendSettingsData()">Добавить</button>
+    <button class="btn btn-danger">Удалить</button>
+    <button class="btn btn-primary">Обновить</button>
+    <!--button class="btn btn-primary" (click)="fetchSettingsData()">Fetch</button-->
+
+    <table>
+        <thead>
+          <th>Название</th>
+          <th>Значение</th>
+          <th>Тип</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let settings of listOfSettings">
+            <td>{{settings.name}}</td>
+            <td>{{settings.value}}</td>
+            <td>{{settings.type}}</td>
+          </tr>
+        </tbody>
+    </table>
+
+    
+  </div>  
+</div>
