@@ -1,0 +1,30 @@
+<div class="modal-header">
+  <h4 class="modal-title">Новая настройка</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="settingsForm">
+    <ul>
+    <li>  
+    <label for="txtName">Название:</label>
+    <input type="text" id="txtName" formControlName="name">
+    </li>
+
+    <li> 
+    <label for="txtValue">Значение:</label>
+    <input type="text" id="txtValue" formControlName="value">
+    </li>
+    <li> 
+    <label for="txtType">Тип:</label>
+    <input type="text" id="txtType" formControlName="type">
+    </li>
+    </ul>  
+  </form>
+</div>
+<div class="modal-footer">
+  <button (click)="addSetting()">
+    Добавить настройку
+  </button>
+</div>

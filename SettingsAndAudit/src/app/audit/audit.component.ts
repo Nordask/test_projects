@@ -26,9 +26,10 @@ export class AuditComponent implements OnInit {
   fetchAuditData() {
     this.sendFetchSrvice.fetchData('audit').subscribe(
       (data) => {
-        this.message = null;
+        this.listOfAudit = null;
+        console.log(data);
         this.listOfAudit = Object.keys(data).map(i => data[i]);
-        console.log(this.listOfAudit);
+        //console.log(this.listOfAudit);
       },
       (err: HttpErrorResponse) => {
         if(err instanceof Error) {

@@ -68,6 +68,7 @@ app.get('/get', (req, res) => {
       console.log(err);
       throw err;
     } else {
+      console.log(`Data from ${fileName}.json was sended`);
       res.send(data);
     }
   })

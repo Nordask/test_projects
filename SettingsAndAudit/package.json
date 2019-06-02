@@ -19,10 +19,12 @@
     "@angular/platform-browser": "~8.0.0",
     "@angular/platform-browser-dynamic": "~8.0.0",
     "@angular/router": "~8.0.0",
+    "@ng-bootstrap/ng-bootstrap": "^1.1.2",
     "ajax": "0.0.4",
     "bootstrap": "^4.3.1",
     "nodemon": "^1.19.1",
-    "rxjs": "~6.4.0",
+    "rxjs": "^6.5.2",
+    "rxjs-compat": "^6.5.2",
     "tslib": "^1.9.0",
     "zone.js": "~0.9.1"
   },

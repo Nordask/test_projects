@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Settings } from '../Interfaces';
 import { SendFetchService } from '../send-fetch.service';
 import { HttpErrorResponse, HttpEventType, HttpResponse } from '@angular/common/http';
+import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
+import { AddModalComponent } from '../add-modal/add-modal.component';
 
 @Component({
   selector: 'app-settings',
@@ -14,8 +16,9 @@ export class SettingsComponent implements OnInit {
   listOfSettings: Settings[];
   message: string;
 
-  constructor(private sendFetchService: SendFetchService) { }
+  constructor(private sendFetchService: SendFetchService, private modalService: NgbModal) { }
   
+  /*
   sendSettingsData() {
     this.settingsData = {
       file: "settings",
@@ -27,6 +30,7 @@ export class SettingsComponent implements OnInit {
     console.log(this.sendFetchService.sendData(this.settingsData));
     //window.location.reload();
   }  
+  */
 
   ngOnInit() {
     this.fetchSettingsData();
@@ -50,6 +54,17 @@ export class SettingsComponent implements OnInit {
         }
       }
     );
+  }
+
+  openFormModal() {
+    const modalRef = this.modalService.open(AddModalComponent);
+    modalRef.componentInstance.listOfSettings = {qq:"ff"};//this.listOfSettings;
+    
+    modalRef.result.then((result) => {
+      console.log(result);
+    }).catch((error) => {
+      console.log(error);
+    });
   }
 
 }
