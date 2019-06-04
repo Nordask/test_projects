@@ -1,0 +1,26 @@
+<div class="modal-header">
+  <h4 class="modal-title">Удаление настройки</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <!--div>
+    <h4>DropDownList</h4>
+    <mat-form-field>
+      <mat-select placeholder="Setting">
+        <mat-option *ngFor="let bank of banks" [value]="bank.bankshortname">{{bank.bankfullname}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div-->
+  <form>
+    <select name = "dropdown">
+      <option *ngFor="let setting of listOfSettings" [value]="setting.name">{{setting.name}}</option>
+    </select>
+  </form>
+</div>
+<div class="modal-footer">
+  <button (click)="deleteSetting()">
+    Добавить настройку
+  </button>
+</div>

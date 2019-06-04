@@ -1,8 +1,8 @@
 <div>
   <div>
-    <button class="btn btn-success" (click)="sendSettingsData()">Добавить</button>
-    <button class="btn btn-danger">Удалить</button>
-    <button class="btn btn-primary">Обновить</button>
+    <button class="btn btn-success" (click)="openAddFormModal()">Добавить</button>
+    <button class="btn btn-danger" (click)="openDeleteFormModal()">Удалить</button>
+    <button class="btn btn-primary" (click)="openUpdateFormModal()">Обновить</button>
     <!--button class="btn btn-primary" (click)="fetchSettingsData()">Fetch</button-->
 
     <table>
@@ -19,7 +19,5 @@
           </tr>
         </tbody>
     </table>
-
-    <button (click)="openFormModal()">Open Modal</button>
   </div>  
 </div>

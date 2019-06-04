@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { Settings } from '../Interfaces';
@@ -9,8 +9,8 @@ import { SendFetchService } from '../send-fetch.service';
   templateUrl: './add-modal.component.html',
   styleUrls: ['./add-modal.component.css']
 })
-export class AddModalComponent {
-  @Input() listOfSettings;
+export class AddModalComponent implements OnInit{
+  @Input() listOfSettings: Settings[];
   settingsForm: FormGroup;
   settingsData: Settings;
 
@@ -20,6 +20,10 @@ export class AddModalComponent {
       value: new FormControl("", [Validators.required]),
       type: new FormControl("", [Validators.required, Validators.pattern("^(Строка|Число|Дата)$")])
     });  
+    console.log(this.listOfSettings);
+  }
+
+  ngOnInit() {
     console.log(this.listOfSettings);
   }
 
