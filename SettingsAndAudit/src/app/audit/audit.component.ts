@@ -3,6 +3,7 @@ import { Audit } from '../Interfaces';
 import { SendFetchService } from '../send-fetch.service';
 import { HttpErrorResponse, HttpEventType, HttpResponse } from '@angular/common/http';
 
+
 @Component({
   selector: 'app-audit',
   templateUrl: './audit.component.html',
@@ -10,17 +11,17 @@ import { HttpErrorResponse, HttpEventType, HttpResponse } from '@angular/common/
 })
 export class AuditComponent implements OnInit {
   auditData: Audit;
-  listOfAudit: Audit[];
+  listOfAudit: Audit[] = [];
   message: string;
 
   constructor(private sendFetchSrvice: SendFetchService) { }
 
-  putSettings() {
-    
-  }
+  column: string = 'dateTime';
+  direction: number = 1;
 
   ngOnInit() {
     this.fetchAuditData();
+    this.column = 'dateTime';
   }
 
   fetchAuditData() {
@@ -29,7 +30,6 @@ export class AuditComponent implements OnInit {
         this.listOfAudit = null;
         console.log(data);
         this.listOfAudit = Object.keys(data).map(i => data[i]);
-        //console.log(this.listOfAudit);
       },
       (err: HttpErrorResponse) => {
         if(err instanceof Error) {
@@ -41,4 +41,9 @@ export class AuditComponent implements OnInit {
       }
     );
   }
+
+  sort(property, direction){ 
+    this.column = property;
+    this.direction = direction;
+  };
 }

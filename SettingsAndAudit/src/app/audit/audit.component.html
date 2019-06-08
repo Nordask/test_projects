@@ -1,25 +1,25 @@
 <div>
-  <table>
+  <table class="table table-responsive table-hover">
     <thead>
       <th class="sort-filter">
-        <button class="btn btn-link collapsed"><i class="arrow down"></i></button>
-        <button class="btn btn-link collapsed"><i class="arrow up"></i></button>
+        <button class="btn btn-link collapsed" (click)="sort('dateTime', '-1')"><i class="arrow down"></i></button>
+        <button class="btn btn-link collapsed" (click)="sort('dateTime', '1')"><i class="arrow up"></i></button>
       </th>
       <th class="sort-filter">
-          <button class="btn btn-link collapsed"><i class="arrow down"></i></button>
-          <button class="btn btn-link collapsed"><i class="arrow up"></i></button>
+          <button class="btn btn-link collapsed" (click)="sort('host', '-1')"><i class="arrow down"></i></button>
+          <button class="btn btn-link collapsed" (click)="sort('host', '1')"><i class="arrow up"></i></button>
       </th>
       <th class="sort-filter">
-          <button class="btn btn-link collapsed"><i class="arrow down"></i></button>
-          <button class="btn btn-link collapsed"><i class="arrow up"></i></button>
+        <button class="btn btn-link collapsed" (click)="sort('event', '-1')"><i class="arrow down"></i></button>
+        <button class="btn btn-link collapsed" (click)="sort('event', '1')"><i class="arrow up"></i></button>
       </th>
       <th class="sort-filter">
-          <button class="btn btn-link collapsed"><i class="arrow down"></i></button>
-          <button class="btn btn-link collapsed"><i class="arrow up"></i></button>
+        <button class="btn btn-link collapsed" (click)="sort('description', '-1')"><i class="arrow down"></i></button>
+        <button class="btn btn-link collapsed" (click)="sort('description', '1')"><i class="arrow up"></i></button>
       </th>
       <th class="sort-filter">
-          <button class="btn btn-link collapsed"><i class="arrow down"></i></button>
-          <button class="btn btn-link collapsed"><i class="arrow up"></i></button>
+        <button class="btn btn-link collapsed" (click)="sort('result', '-1')"><i class="arrow down"></i></button>
+        <button class="btn btn-link collapsed" (click)="sort('result', '1')"><i class="arrow up"></i></button>
       </th>
     </thead>
     <thead>
@@ -30,14 +30,13 @@
       <th>Результат</th>
     </thead>
     <tbody>
-      <tr *ngFor="let audit of listOfAudit">
-        <td>{{audit.dateTime}}</td>
+      <tr *ngFor="let audit of listOfAudit | orderBy: {property: column, direction: direction}">
+        <td>{{audit.dateTime | date: "dd/MM/yyyy"}}</td>
         <td>{{audit.host}}</td>
         <td>{{audit.event}}</td>
         <td>{{audit.description}}</td>
         <td>{{audit.result}}</td>
       </tr>
     </tbody>
-  </table> 
-  <button (click)="fetchAuditData()">QQ</button>
+  </table>
 </div>

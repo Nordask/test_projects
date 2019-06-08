@@ -9,7 +9,7 @@ export interface Settings {
   export interface Audit {
     file: string, // setting 
     operation: string, // add, remove, update
-    dateTime: string,
+    dateTime: Date,
     host: string,
     event: string,
     description: string,
