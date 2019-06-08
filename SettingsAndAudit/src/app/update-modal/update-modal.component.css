@@ -1,0 +1,24 @@
+#registerDiv
+{
+    background-color: #be9e9e;
+    width: 600px;
+    height: 320px;
+    border-radius: 3px;
+    margin: auto;
+    text-align: center;
+}
+
+input.ng-invalid.ng-touched 
+{
+    border: 2px solid red;
+}
+
+input.ng-valid.ng-touched 
+{
+    border: 2px solid green;
+}
+
+.error
+{
+    color: red;
+}

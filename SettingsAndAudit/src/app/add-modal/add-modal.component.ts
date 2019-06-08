@@ -25,6 +25,21 @@ export class AddModalComponent implements OnInit{
 
   ngOnInit() {
     console.log(this.listOfSettings);
+    this.settingsForm.get('type').valueChanges.subscribe(item => {
+      switch(item) {
+        case 'Строка':
+            this.settingsForm.controls["value"].setValidators([Validators.minLength(1), Validators.maxLength(30)]);
+        break;
+
+        case 'Число':
+            this.settingsForm.controls["value"].setValidators([Validators.pattern("^[0-9]$")]);
+        break;
+
+        case 'Дата':
+            this.settingsForm.controls["value"].setValidators([Validators.pattern("^[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{4}$")]);
+        break;    
+      }
+    });
   }
 
   addSetting() {
@@ -36,12 +51,15 @@ export class AddModalComponent implements OnInit{
         value: this.settingsForm.controls.value.value,
         type: this.settingsForm.controls.type.value
       }
+      
       console.log(this.sendFetchService.sendData(this.settingsData));
       console.log(this.settingsData);
       console.log(this.listOfSettings);
+      
+      this.activeModal.close('Modal Closed');
     }  
       
-    this.activeModal.close('Modal Closed');
+    
   }
  
   closeModal() {

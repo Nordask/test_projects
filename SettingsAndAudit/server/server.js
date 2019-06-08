@@ -46,8 +46,21 @@ app.post('/post', (req, res) => {
           res.send(`Data written to ${fileName}.json`)
           })
           break;  
-        case 'remove':
-        
+        case 'delete':
+          var obj = JSON.parse(data); // current data from file
+          var name = req.body.name;
+          console.log(obj);
+          var newArr = obj.filter(item => {
+            return item.name !== name;
+          });
+          fs.writeFile(`data/${fileName}.json`, JSON.stringify(newArr), (err) => {
+            if (err) {
+              console.log(err);
+              throw err;
+            } 
+          console.log(`Data written to ${fileName}.json`);
+          res.send(`Data with name ${name} was removed from ${fileName}.json`)
+          })
           break;
         case 'update':
           

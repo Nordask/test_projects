@@ -5,22 +5,14 @@
   </button>
 </div>
 <div class="modal-body">
-  <!--div>
-    <h4>DropDownList</h4>
-    <mat-form-field>
-      <mat-select placeholder="Setting">
-        <mat-option *ngFor="let bank of banks" [value]="bank.bankshortname">{{bank.bankfullname}}</mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div-->
   <form>
-    <select name = "dropdown">
+    <select name = "dropdown" [(ngModel)]="selectedName" (change)="selected()">
       <option *ngFor="let setting of listOfSettings" [value]="setting.name">{{setting.name}}</option>
     </select>
   </form>
 </div>
 <div class="modal-footer">
   <button (click)="deleteSetting()">
-    Добавить настройку
+    Удалить настройку
   </button>
 </div>
