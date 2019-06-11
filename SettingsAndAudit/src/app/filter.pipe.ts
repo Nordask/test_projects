@@ -20,9 +20,9 @@ export class FilterPipe implements PipeTransform {
       console.log(searchDescription === undefined? true : value.description.includes(searchDescription))
 
       console.log(searchHost ==null? true : value.host.includes(searchHost) && searchEvent ==null? true : value.event.includes(searchEvent) && searchDescription ==null? true : value.description.includes(searchDescription))
-     return searchHost == null? true : value.host.includes(searchHost) &&
-            searchEvent == null? true : value.event.includes(searchEvent) &&
-            searchDescription == null? true : value.description.includes(searchDescription);
+     return (searchHost == null? true : value.host.includes(searchHost)) &&
+            (searchEvent == null? true : value.event.includes(searchEvent)) &&
+            (searchDescription == null? true : value.description.includes(searchDescription));
    })
  }
 
