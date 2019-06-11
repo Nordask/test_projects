@@ -16,7 +16,7 @@ import { AddModalComponent } from './add-modal/add-modal.component';
 import { DeleteModalComponent } from './delete-modal/delete-modal.component';
 import { UpdateModalComponent } from './update-modal/update-modal.component';
 import { OrderByPipe } from './order-by.pipe';
-import { CategoryPipe } from './category.pipe';
+import { FilterPipe } from './filter.pipe';
 
 @NgModule({
   declarations: [
@@ -27,7 +27,7 @@ import { CategoryPipe } from './category.pipe';
     DeleteModalComponent,
     UpdateModalComponent,
     OrderByPipe,
-    CategoryPipe
+    FilterPipe
   ],
   imports: [
     BrowserModule,

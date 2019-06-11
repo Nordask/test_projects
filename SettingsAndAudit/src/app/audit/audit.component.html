@@ -1,6 +1,23 @@
 <div>
   <table class="table table-responsive table-hover">
     <thead>
+      <th>
+        <input type="text" [(ngModel)]="searchDateTime" class="form-control" placeholder="Search" />
+      </th>
+      <th>
+        <input type="text" [(ngModel)]="searchHost" class="form-control" placeholder="Search" />
+      </th>
+      <th>
+        <input type="text" [(ngModel)]="searchEvent" class="form-control" placeholder="Search" />
+      </th>
+      <th>
+        <input type="text" [(ngModel)]="searchDescription" class="form-control" placeholder="Search" />
+      </th>
+      <th>
+        
+      </th>
+    </thead>
+    <thead>
       <th class="sort-filter">
         <button class="btn btn-link collapsed" (click)="sort('dateTime', '-1')"><i class="arrow down"></i></button>
         <button class="btn btn-link collapsed" (click)="sort('dateTime', '1')"><i class="arrow up"></i></button>
@@ -30,7 +47,7 @@
       <th>Результат</th>
     </thead>
     <tbody>
-      <tr *ngFor="let audit of listOfAudit | orderBy: {property: column, direction: direction}">
+      <tr *ngFor="let audit of listOfAudit | filter: searchDateTime:searchHost:searchEvent:searchDescription | orderBy: {property: column, direction: direction}">
         <td>{{audit.dateTime | date: "dd/MM/yyyy"}}</td>
         <td>{{audit.host}}</td>
         <td>{{audit.event}}</td>

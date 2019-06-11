@@ -13,6 +13,7 @@ export class AuditComponent implements OnInit {
   auditData: Audit;
   listOfAudit: Audit[] = [];
   message: string;
+  filterArgs = {title: 'dateTime'};
 
   constructor(private sendFetchSrvice: SendFetchService) { }
 
@@ -21,7 +22,6 @@ export class AuditComponent implements OnInit {
 
   ngOnInit() {
     this.fetchAuditData();
-    this.column = 'dateTime';
   }
 
   fetchAuditData() {
