@@ -28,17 +28,25 @@ export class AddModalComponent implements OnInit{
     this.settingsForm.get('type').valueChanges.subscribe(item => {
       switch(item) {
         case 'Строка':
-            this.settingsForm.controls["value"].setValidators([Validators.minLength(1), Validators.maxLength(30)]);
+            this.settingsForm.controls["value"].clearValidators();
+            this.settingsForm.controls["value"].setValidators([Validators.required]);
+            this.settingsForm.controls["value"].updateValueAndValidity();
         break;
 
         case 'Число':
-            this.settingsForm.controls["value"].setValidators([Validators.pattern("^[0-9]$")]);
+            this.settingsForm.controls["value"].clearValidators();
+            this.settingsForm.controls["value"].setValidators([Validators.pattern("[0-9]*$")]);
+            this.settingsForm.controls["value"].updateValueAndValidity();
         break;
 
         case 'Дата':
+            this.settingsForm.controls["value"].clearValidators();
             this.settingsForm.controls["value"].setValidators([Validators.pattern("^[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{4}$")]);
-        break;    
+            this.settingsForm.controls["value"].updateValueAndValidity();
+        break;
+        default:
       }
+      console.log(this.settingsForm)
     });
   }
 

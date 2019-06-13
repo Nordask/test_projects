@@ -49,7 +49,7 @@ export class UpdateModalComponent implements OnInit {
 
         case 'Число':
             this.settingsForm.controls["value"].clearValidators();
-            this.settingsForm.controls["value"].setValidators([Validators.pattern("^[0-9]*$")]);
+            this.settingsForm.controls["value"].setValidators([Validators.pattern("[0-9]*$")]);
             this.settingsForm.controls["value"].updateValueAndValidity();
         break;
 
@@ -64,11 +64,11 @@ export class UpdateModalComponent implements OnInit {
     });
   }
 
-  addSetting() {
+  updateSetting() {
     if(this.settingsForm.valid == true) {
       this.settingsData = {
         file: "settings",
-        operation: "add",
+        operation: "update",
         name: this.settingsForm.controls.name.value,
         value: this.settingsForm.controls.value.value,
         type: this.settingsForm.controls.type.value

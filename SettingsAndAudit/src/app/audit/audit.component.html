@@ -48,7 +48,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let audit of listOfAudit | filter: searchDateTime:searchHost:searchEvent:searchDescription | orderBy: {property: column, direction: direction}">
-        <td>{{audit.dateTime | date: "dd/MM/yyyy"}}</td>
+        <td>{{audit.dateTime | date: "dd/MM/yyyy hh:mm:ss"}}</td>
         <td>{{audit.host}}</td>
         <td>{{audit.event}}</td>
         <td>{{audit.description}}</td>

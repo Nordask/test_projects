@@ -63,7 +63,24 @@ app.post('/post', (req, res) => {
           })
           break;
         case 'update':
+          var obj = JSON.parse(data); // current data from file
+          var name = req.body.name;
+          console.log(obj);
+          var newArr = obj.filter(item => {
+            return item.name == name;
+          });
+          let i = obj.indexOf(newArr[0]);
+          obj[i].value = req.body.value;
+          obj[i].type = req.body.type;
           
+          fs.writeFile(`data/${fileName}.json`, JSON.stringify(obj), (err) => {
+            if (err) {
+              console.log(err);
+              throw err;
+            } 
+          console.log(`Data was updated for ${fileName}.json`);
+          res.send(`Data with name ${name} was was updated for ${fileName}.json`)
+          })
           break;
         default:
       }   
