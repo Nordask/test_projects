@@ -16,9 +16,11 @@ export class DeleteModalComponent implements OnInit{
 
   constructor(private activeModal: NgbActiveModal, private sendFetchService:SendFetchService) { }
 
-  deleteSetting() {
-    this.sendFetchService.sendData(this.selectedSetting);
-    this.activeModal.close('Modal Closed');
+  deleteSetting(name: string) {
+    if(confirm("Вы уверены, что хотите удалить настроку "+name)) {
+      this.sendFetchService.sendData(this.selectedSetting);
+      this.activeModal.close('Modal Closed');
+    } 
   }
 
   selected() {
@@ -34,5 +36,4 @@ export class DeleteModalComponent implements OnInit{
   ngOnInit() {
     this.selectedName = this.listOfSettings[0].name;
   }
-
 }

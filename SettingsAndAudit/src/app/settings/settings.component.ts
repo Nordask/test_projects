@@ -66,6 +66,9 @@ export class SettingsComponent implements OnInit {
     }).catch((error) => {
       console.log(error);
     });
+
+    //this.fetchSettingsData();
+    //console.log(this.listOfSettings)
   }
 
   openDeleteFormModal() {
@@ -89,5 +92,4 @@ export class SettingsComponent implements OnInit {
       console.log(error);
     });
   }
-
 }

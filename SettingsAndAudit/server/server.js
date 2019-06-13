@@ -49,7 +49,6 @@ app.post('/post', (req, res) => {
         case 'delete':
           var obj = JSON.parse(data); // current data from file
           var name = req.body.name;
-          console.log(obj);
           var newArr = obj.filter(item => {
             return item.name !== name;
           });
@@ -65,7 +64,6 @@ app.post('/post', (req, res) => {
         case 'update':
           var obj = JSON.parse(data); // current data from file
           var name = req.body.name;
-          console.log(obj);
           var newArr = obj.filter(item => {
             return item.name == name;
           });
