@@ -1,0 +1,21 @@
+<div id="loginDiv">
+  <h4>Login</h4>
+  <form #myForm="ngForm">
+    
+    Имя пользователя: <input type="text" [(ngModel)]="login" [ngModelOptions]="{standalone: true}" 
+    required="required" #controlEmail="ngModel" pattern="^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$">
+    <span class="error" *ngIf="controlEmail.invalid && controlEmail.touched 
+    && controlEmail.errors.required">Поле имя пользователя не заполнено</span>
+    <br>
+
+    Пароль: <input type="password" [(ngModel)]="password" name="password" 
+    required="required" #controlPassword="ngModel">
+    <br>
+    <span class="error" *ngIf="controlPassword.invalid && controlPassword.touched 
+    && controlPassword.errors.required">Поле пароль не заполнено</span>
+
+    <input type="submit" value="Login" (click)="onLoginClick(myForm)">
+    <br>
+    {{message}}
+  </form>
+</div>

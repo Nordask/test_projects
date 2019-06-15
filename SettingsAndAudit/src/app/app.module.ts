@@ -17,6 +17,9 @@ import { DeleteModalComponent } from './delete-modal/delete-modal.component';
 import { UpdateModalComponent } from './update-modal/update-modal.component';
 import { OrderByPipe } from './order-by.pipe';
 import { FilterPipe } from './filter.pipe';
+import { LoginComponent } from './login/login.component';
+import { LoginService } from './login.service';
+import { AuthGuardService } from './auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,8 @@ import { FilterPipe } from './filter.pipe';
     DeleteModalComponent,
     UpdateModalComponent,
     OrderByPipe,
-    FilterPipe
+    FilterPipe,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +46,7 @@ import { FilterPipe } from './filter.pipe';
     MatCheckboxModule,
     MatSelectModule
   ],
-  providers: [SendFetchService],
+  providers: [SendFetchService, LoginService, AuthGuardService],
   bootstrap: [AppComponent],
   entryComponents: [
     AddModalComponent,
