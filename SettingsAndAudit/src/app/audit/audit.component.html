@@ -52,7 +52,15 @@
         <td>{{audit.host}}</td>
         <td>{{audit.event}}</td>
         <td>{{audit.description}}</td>
-        <td>{{audit.result}}</td>
+        <td>
+          <div *ngIf="audit.result == 'success'; then template1; else template2"></div>
+          <ng-template #template1>
+            <img width="30px" src="assets/icons/positive.png">
+          </ng-template>
+          <ng-template #template2>
+            <img width="30px" src="assets/icons/negative.png">
+          </ng-template>
+        </td>
       </tr>
     </tbody>
   </table>
