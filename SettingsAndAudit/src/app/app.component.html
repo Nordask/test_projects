@@ -2,6 +2,10 @@
   <nav id="navbar">
     <a class="btn btn-primary" routerLink="settings">Настройки</a>
     <a class="btn btn-primary" routerLink="audit">Аудит</a>
+    <div id="push"></div>
+    <div  >
+        <button *ngIf="isLogged" class="btn btn-primary" routerLink="login" id="logout" (click)="logout()">Выйти</button>
+    </div>
   </nav>
   <div id="main-doc">
     <router-outlet></router-outlet>

@@ -1,5 +1,7 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, Output, EventEmitter } from '@angular/core';
 import { LoginService } from '../login.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-login',
@@ -11,13 +13,15 @@ export class LoginComponent {
   password: string;
   message: string;
 
-  constructor(@Inject(LoginService) private s:LoginService) {}
+  constructor(private loggedService:LoginService, private router: Router) {}
 
-  onLoginClick(myForm) {
-    console.log(myForm)
-    if(myForm.valid == true) {
-      if(this.s.checkLoginAndPassword(this.login, this.password)) {
+  onLoginClick(loginForm) {
+    console.log(loginForm)
+    if(loginForm.valid == true) {
+      if(this.loggedService.checkLoginAndPassword(this.login, this.password)) {
         this.message = "Successfully Login";
+        console.log(this.loggedService.isLoggednIn());
+        this.router.navigate(['/settings']);
       } else {
         this.message = "Invalid Login";
       }

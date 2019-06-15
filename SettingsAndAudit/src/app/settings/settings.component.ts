@@ -63,6 +63,7 @@ export class SettingsComponent implements OnInit {
     
     modalRef.result.then((result) => {
       console.log(result);
+      this.ngOnInit();
     }).catch((error) => {
       console.log(error);
     });
