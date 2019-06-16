@@ -26,8 +26,8 @@ app.use(function(req, res, next) {
 app.post('/post', (req, res) => {
   console.log('Received request with body:');
   console.log(req.body);
-  let fileName = req.body.file;
-  let operationName = req.body.operation;
+  let fileName = req.query.file;
+  let operationName = req.query.operation;
   fs.readFile(`data/${fileName}.json`, 'utf8', (err, data) => {
     if(err) {
       console.log(err);
@@ -43,7 +43,7 @@ app.post('/post', (req, res) => {
               throw err;
             } 
           console.log(`Data written to ${fileName}.json`);
-          res.send(`Data written to ${fileName}.json`)
+          res.send(obj)
           })
           break;  
         case 'delete':
@@ -58,7 +58,7 @@ app.post('/post', (req, res) => {
               throw err;
             } 
           console.log(`Data written to ${fileName}.json`);
-          res.send(`Data with name ${name} was removed from ${fileName}.json`)
+          res.send(newArr)
           })
           break;
         case 'update':
@@ -77,7 +77,7 @@ app.post('/post', (req, res) => {
               throw err;
             } 
           console.log(`Data was updated for ${fileName}.json`);
-          res.send(`Data with name ${name} was was updated for ${fileName}.json`)
+          res.send(obj)
           })
           break;
         default:

@@ -14,11 +14,8 @@ export class AppComponent implements OnInit{
   constructor(private router: Router, private loginService: LoginService) {}
 
   ngOnInit() {
-    console.log('qq')
     this.isLogged = this.loginService.isLoggednIn();
-    console.log(this.isLogged)
     if(this.isLogged === false) {
-      console.log('!!!!!!!!!!!!')
       this.router.navigate(['login']);
     }
   }

@@ -7,12 +7,6 @@ import { Audit } from './Interfaces';
 export class FilterPipe implements PipeTransform {
 
   transform(value: Audit[], searchDateTime: any, searchHost: any, searchEvent: any, searchDescription: any): any {
-    /*
-    console.log(`DateTime ${searchDateTime}`)
-    console.log(`Host ${searchHost}`)
-    console.log(`Event ${searchEvent}`)
-    console.log(`Description ${searchDescription}`)
-    */
     return value.filter(function(value){
       return (searchDateTime == null? true : new String(value.dateTime).includes(searchDateTime)) &&
              (searchHost == null? true : value.host.includes(searchHost)) &&

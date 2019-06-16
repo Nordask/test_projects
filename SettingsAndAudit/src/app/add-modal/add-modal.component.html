@@ -35,6 +35,10 @@
       </li>
     </ul>  
   </form>
+
+  <div *ngIf="message">
+    {{message}}
+  </div>
 </div>
 <div class="modal-footer">
   <button class="btn btn-secondary" (click)="addSetting()">

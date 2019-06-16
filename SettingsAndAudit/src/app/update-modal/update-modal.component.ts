@@ -1,8 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Settings } from '../Interfaces';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { SendFetchService } from '../send-fetch.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-update-modal',
@@ -11,10 +12,12 @@ import { SendFetchService } from '../send-fetch.service';
 })
 export class UpdateModalComponent implements OnInit {
   @Input() listOfSettings: Settings[];
+  @Output() passEntry: EventEmitter<Settings[]> = new EventEmitter();
   settingsForm: FormGroup;
   settingsData: Settings;
   selectedName: string;
   selectedSetting: Settings;
+  message: string;
 
   constructor(private activeModal: NgbActiveModal, private sendFetchService: SendFetchService) { 
     this.settingsForm = new FormGroup({
@@ -25,7 +28,6 @@ export class UpdateModalComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.listOfSettings);
     this.settingsForm.controls['name'].setValue(this.listOfSettings[0].name);
     this.settingsForm.controls['type'].setValue(this.listOfSettings[0].type);
     this.settingsForm.controls['value'].setValue(this.listOfSettings[0].value);
@@ -60,25 +62,32 @@ export class UpdateModalComponent implements OnInit {
         break;
         default:
       }
-      console.log(this.settingsForm)
     });
   }
 
   updateSetting() {
     if(this.settingsForm.valid == true) {
       this.settingsData = {
-        file: "settings",
-        operation: "update",
         name: this.settingsForm.controls.name.value,
         value: this.settingsForm.controls.value.value,
         type: this.settingsForm.controls.type.value
       }
-      console.log(this.sendFetchService.sendData(this.settingsData));
-      console.log(this.settingsData);
-      console.log(this.listOfSettings);
+      this.sendFetchService.sendData(this.settingsData, "settings", "update").subscribe((data) => {
+        this.message = null;
+        this.listOfSettings = Object.keys(data).map(i => data[i]);
+        this.passEntry.emit(this.listOfSettings);
+      },
+      (err: HttpErrorResponse) => {
+        if(err instanceof Error) {
+          // client-side error
+          this.message = `An error occured ${err.error.message}`;
+        } else {
+          this.message = `Backend returned err code ${err.status}, body was: ${err.message}`;
+        }
+      });
+
+      this.activeModal.close('Modal Closed');
     }  
-      
-    this.activeModal.close('Modal Closed');
   }
  
   closeModal() {
