@@ -6,13 +6,13 @@
 </div>
 <div class="modal-body">
   <form>
-    <select name = "dropdown" [(ngModel)]="selectedName" (change)="selected()">
+    <select class="browser-default custom-select" name = "dropdown" [(ngModel)]="selectedName" (change)="selected()">
       <option *ngFor="let setting of listOfSettings" [value]="setting.name">{{setting.name}}</option>
     </select>
   </form>
 </div>
 <div class="modal-footer">
-  <button (click)="deleteSetting(selectedName)">
+  <button class="btn btn-secondary" (click)="deleteSetting(selectedName)">
     Удалить настройку
   </button>
 </div>

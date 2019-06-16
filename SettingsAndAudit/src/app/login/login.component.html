@@ -1,5 +1,5 @@
 <div id="loginDiv">
-  <h4>Login</h4>
+  <h4>Вход</h4>
   <form #loginForm="ngForm">
     
     Имя пользователя: <input type="text" [(ngModel)]="login" [ngModelOptions]="{standalone: true}" 
@@ -14,7 +14,7 @@
     <span class="error" *ngIf="controlPassword.invalid && controlPassword.touched 
     && controlPassword.errors.required">Поле пароль не заполнено</span>
 
-    <input type="button" value="Login" (click)="onLoginClick(loginForm)">
+    <input type="button" class="btn btn-info" value="Вход" (click)="onLoginClick(loginForm)">
     <br>
     {{message}}
   </form>
