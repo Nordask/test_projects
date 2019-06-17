@@ -16,11 +16,10 @@ export class LoginComponent {
   constructor(private loggedService:LoginService, private router: Router) {}
 
   onLoginClick(loginForm) {
-    console.log(loginForm)
     if(loginForm.valid == true) {
       if(this.loggedService.checkLoginAndPassword(this.login, this.password)) {
         this.message = "Successfully Login";
-        console.log(this.loggedService.isLoggednIn());
+        this.loggedService.isLoggednIn();
         this.router.navigate(['/settings']);
       } else {
         this.message = "Invalid Login";

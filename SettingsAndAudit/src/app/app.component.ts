@@ -1,4 +1,4 @@
-import { Component, OnInit, Directive, Input } from '@angular/core';
+import { Component, OnInit, AfterContentChecked } from '@angular/core';
 import { LoginService } from './login.service';
 import { Router } from '@angular/router';
 
@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit, AfterContentChecked{
   title = 'SettingsAndAudit';
   isLogged: boolean;
 
@@ -22,6 +22,10 @@ export class AppComponent implements OnInit{
 
   logout() {
     localStorage.removeItem('currentUser');  
+    this.isLogged = this.loginService.isLoggednIn();
+  }
+
+  ngAfterContentChecked() {
     this.isLogged = this.loginService.isLoggednIn();
   }
 }
