@@ -5,14 +5,15 @@
   </button>
 </div>
 <div class="modal-body">
-  <form>
+  {{name}}
+  <!--form>
     <select class="browser-default custom-select" name = "dropdown" [(ngModel)]="selectedName" (change)="selected()">
       <option *ngFor="let setting of listOfSettings" [value]="setting.name">{{setting.name}}</option>
     </select>
-  </form>
+  </form-->
 </div>
 <div class="modal-footer">
-  <button class="btn btn-secondary" (click)="deleteSetting(selectedName)">
+  <button class="btn btn-secondary" (click)="deleteSetting()">
     Удалить настройку
   </button>
 </div>

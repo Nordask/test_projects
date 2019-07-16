@@ -6,6 +6,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddModalComponent } from '../add-modal/add-modal.component';
 import { DeleteModalComponent } from '../delete-modal/delete-modal.component';
 import { UpdateModalComponent } from '../update-modal/update-modal.component';
+import {MatTableDataSource} from '@angular/material/table';
 
 @Component({
   selector: 'app-settings',
@@ -16,11 +17,14 @@ export class SettingsComponent implements OnInit {
   settingsData: Settings;
   listOfSettings: Settings[];
   message: string; // if http request failed, information about fail will write at that var
+  displayedColumns: string[] = ['name', 'value', 'type', 'actions'];
+  dataSource;
 
   constructor(private sendFetchService: SendFetchService, private modalService: NgbModal) { }
 
   ngOnInit() {
     this.fetchSettingsData();
+    console.log(this.listOfSettings)
   }
 
   fetchSettingsData() {
@@ -28,6 +32,7 @@ export class SettingsComponent implements OnInit {
       (data) => {
         this.message = null;
         this.listOfSettings = Object.keys(data).map(i => data[i]);
+        this.dataSource= new MatTableDataSource(this.listOfSettings);
       },
       (err: HttpErrorResponse) => {
         if(err instanceof Error) {
@@ -55,9 +60,10 @@ export class SettingsComponent implements OnInit {
     });
   }
 
-  openDeleteFormModal() {
+  openDeleteFormModal(name: string) {
     const modalRef = this.modalService.open(DeleteModalComponent);
     modalRef.componentInstance.listOfSettings = this.listOfSettings;
+    modalRef.componentInstance.name = name;
     
     modalRef.componentInstance.passEntry.subscribe((receivedEntry) => {
       this.listOfSettings = receivedEntry;

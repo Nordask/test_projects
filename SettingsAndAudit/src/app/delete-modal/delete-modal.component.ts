@@ -12,6 +12,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class DeleteModalComponent implements OnInit{
   @Input() listOfSettings;
+  @Input() name;
   @Output() passEntry: EventEmitter<Settings[]> = new EventEmitter();
   selectedName: string;
   selectedSetting: Settings;
@@ -19,8 +20,9 @@ export class DeleteModalComponent implements OnInit{
 
   constructor(private activeModal: NgbActiveModal, private sendFetchService:SendFetchService) { }
 
-  deleteSetting(name: string) {
-    if(confirm("Вы уверены, что хотите удалить настроку "+name)) {
+  deleteSetting() {
+    this.selected();
+    if(confirm("Вы уверены, что хотите удалить настроку " + this.name)) {
       this.sendFetchService.sendData(this.selectedSetting, "settings", "delete").subscribe((data) => {
         this.message = null;
         this.listOfSettings = Object.keys(data).map(i => data[i]);
@@ -41,14 +43,13 @@ export class DeleteModalComponent implements OnInit{
 
   selected() {
     this.selectedSetting = {
-      name: this.selectedName,
+      name: this.name,
       value: "",
       type: ""
     }
   } 
 
   ngOnInit() {
-    this.selectedName = this.listOfSettings[0].name;
-    this.selected();
+
   }
 }
