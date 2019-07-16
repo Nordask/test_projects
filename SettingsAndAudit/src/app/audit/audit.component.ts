@@ -4,6 +4,7 @@ import { SendFetchService } from '../send-fetch.service';
 import { HttpErrorResponse, HttpEventType, HttpResponse } from '@angular/common/http';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
+import { FormControl } from '@angular/forms';
 
 
 @Component({
@@ -20,6 +21,18 @@ export class AuditComponent implements OnInit, AfterViewInit {
   dataSource;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
+  dateTimeFilter = new FormControl('');
+  hostFilter = new FormControl('');
+  eventFilter = new FormControl('');
+  descriptionFilter = new FormControl('');
+
+  filterValues = {
+    dateTime: '',
+    host: '',
+    event: '',
+    description: ''
+  };
+
   constructor(private sendFetchSrvice: SendFetchService) { }
 
   column: string = 'dateTime';
@@ -27,6 +40,35 @@ export class AuditComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.fetchAuditData();
+
+    this.dateTimeFilter.valueChanges
+      .subscribe(
+        dateTime => {
+          this.filterValues.dateTime = dateTime;
+          this.dataSource.filter = JSON.stringify(this.filterValues);
+        }
+      )
+    this.hostFilter.valueChanges
+      .subscribe(
+        host => {
+          this.filterValues.host = host;
+          this.dataSource.filter = JSON.stringify(this.filterValues);
+        }
+      )
+    this.eventFilter.valueChanges
+      .subscribe(
+        event => {
+          this.filterValues.event = event;
+          this.dataSource.filter = JSON.stringify(this.filterValues);
+        }
+      )
+    this.descriptionFilter.valueChanges
+      .subscribe(
+        description => {
+          this.filterValues.description = description;
+          this.dataSource.filter = JSON.stringify(this.filterValues);
+        }
+      )   
   }
 
   ngAfterViewInit() {
@@ -41,6 +83,7 @@ export class AuditComponent implements OnInit, AfterViewInit {
         this.listOfAudit = Object.keys(data).map(i => data[i]);
         this.dataSource= new MatTableDataSource(this.listOfAudit);
         this.dataSource.sort = this.sort;
+        this.dataSource.filterPredicate = this.tableFilter();
       },
       (err: HttpErrorResponse) => {
         if(err instanceof Error) {
@@ -53,6 +96,16 @@ export class AuditComponent implements OnInit, AfterViewInit {
     );
   }
 
+  tableFilter(): (data: any, filter: string) => boolean {
+    let filterFunction = function(data, filter): boolean {
+      let searchTerms = JSON.parse(filter);
+      return data.dateTime.toLowerCase().indexOf(searchTerms.dateTime) !== -1
+        && data.host.toString().toLowerCase().indexOf(searchTerms.host) !== -1
+        && data.event.toLowerCase().indexOf(searchTerms.event) !== -1
+        && data.description.toLowerCase().indexOf(searchTerms.description) !== -1;
+    }
+    return filterFunction;
+  } 
   /*
   sort(property, direction){ 
     this.column = property;

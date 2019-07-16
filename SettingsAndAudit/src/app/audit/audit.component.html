@@ -1,97 +1,62 @@
 <div>
-  <table class="table table-responsive table-hover">
-    <thead>
-      <th>
-        <input type="text" [(ngModel)]="searchDateTime" class="form-control" placeholder="Поиск" />
-      </th>
-      <th>
-        <input type="text" [(ngModel)]="searchHost" class="form-control" placeholder="Поиск" />
-      </th>
-      <th>
-        <input type="text" [(ngModel)]="searchEvent" class="form-control" placeholder="Поиск" />
-      </th>
-      <th>
-        <input type="text" [(ngModel)]="searchDescription" class="form-control" placeholder="Поиск" />
-      </th>
-      <th>
-        
-      </th>
-    </thead>
-    <thead>
-      <th class="sort-filter">
-        <button class="btn btn-link collapsed" (click)="sort('dateTime', '-1')"><i class="arrow down"></i></button>
-        <button class="btn btn-link collapsed" (click)="sort('dateTime', '1')"><i class="arrow up"></i></button>
-      </th>
-      <th class="sort-filter">
-          <button class="btn btn-link collapsed" (click)="sort('host', '-1')"><i class="arrow down"></i></button>
-          <button class="btn btn-link collapsed" (click)="sort('host', '1')"><i class="arrow up"></i></button>
-      </th>
-      <th class="sort-filter">
-        <button class="btn btn-link collapsed" (click)="sort('event', '-1')"><i class="arrow down"></i></button>
-        <button class="btn btn-link collapsed" (click)="sort('event', '1')"><i class="arrow up"></i></button>
-      </th>
-      <th class="sort-filter">
-        <button class="btn btn-link collapsed" (click)="sort('description', '-1')"><i class="arrow down"></i></button>
-        <button class="btn btn-link collapsed" (click)="sort('description', '1')"><i class="arrow up"></i></button>
-      </th>
-      <th class="sort-filter">
-        <button class="btn btn-link collapsed" (click)="sort('result', '-1')"><i class="arrow down"></i></button>
-        <button class="btn btn-link collapsed" (click)="sort('result', '1')"><i class="arrow up"></i></button>
-      </th>
-    </thead>
-    <thead>
-      <th>Дата и время</th>
-      <th>Хост</th>
-      <th>Событие</th>
-      <th>Комментарий</th>
-      <th>Результат</th>
-    </thead>
-    <tbody>
-      <tr *ngFor="let audit of listOfAudit | filter: searchDateTime:searchHost:searchEvent:searchDescription | orderBy: {property: column, direction: direction}">
-        <td>{{audit.dateTime | date: "dd/MM/yyyy hh:mm:ss"}}</td>
-        <td>{{audit.host}}</td>
-        <td>{{audit.event}}</td>
-        <td>{{audit.description}}</td>
-        <td>
-          <div *ngIf="audit.result == 'success'; then template1; else template2"></div>
-          <ng-template #template1>
-            <img width="30px" src="assets/icons/positive.png">
-          </ng-template>
-          <ng-template #template2>
-            <img width="30px" src="assets/icons/negative.png">
-          </ng-template>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-
-
-
-
   <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
     <ng-container matColumnDef="dateTime">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Дата и время </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> 
+        Дата и время 
+        <mat-form-field class="filter" floatLabel="never">
+            <mat-label>Поиск...</mat-label>
+            <input matInput [formControl]="dateTimeFilter">
+        </mat-form-field>
+      </th>
       <td mat-cell *matCellDef="let element"> {{element.dateTime}} </td>
     </ng-container>
 
     <ng-container matColumnDef="host">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Хост </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> 
+        Хост 
+        <mat-form-field class="filter" floatLabel="never">
+            <mat-label>Поиск...</mat-label>
+            <input matInput [formControl]="hostFilter">
+        </mat-form-field>
+      </th>
       <td mat-cell *matCellDef="let element"> {{element.host}} </td>
     </ng-container>
 
     <ng-container matColumnDef="event">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Событие </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> 
+        Событие 
+        <mat-form-field class="filter" floatLabel="never">
+            <mat-label>Поиск...</mat-label>
+            <input matInput [formControl]="eventFilter">
+        </mat-form-field>
+      </th>
       <td mat-cell *matCellDef="let element"> {{element.event}} </td>
     </ng-container>
 
     <ng-container matColumnDef="description">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Комментарий </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> 
+        Комментарий 
+        <mat-form-field class="filter" floatLabel="never">
+            <mat-label>Поиск...</mat-label>
+            <input matInput [formControl]="descriptionFilter">
+        </mat-form-field>
+      </th>
       <td mat-cell *matCellDef="let element"> {{element.description}} </td>
     </ng-container>
 
     <ng-container matColumnDef="result">
-      <th mat-header-cell *matHeaderCellDef> Результат </th>
-      <td mat-cell *matCellDef="let element"> {{element.result}} </td>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> 
+        Результат
+      </th>
+      <td mat-cell *matCellDef="let element">
+        <div *ngIf="element.result == 'success'; then template1; else template2"></div>
+        <ng-template #template1>
+          <img width="30px" src="assets/icons/positive.png">
+        </ng-template>
+        <ng-template #template2>
+          <img width="30px" src="assets/icons/negative.png">
+        </ng-template>
+      </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
