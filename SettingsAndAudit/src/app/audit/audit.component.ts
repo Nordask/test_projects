@@ -16,7 +16,6 @@ export class AuditComponent implements OnInit, AfterViewInit {
   auditData: Audit;
   listOfAudit: Audit[] = [];
   message: string;
-  filterArgs = {title: 'dateTime'};
   displayedColumns: string[] = ['dateTime', 'host', 'event', 'description', 'result'];
   dataSource;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
