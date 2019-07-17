@@ -76,9 +76,11 @@ export class SettingsComponent implements OnInit {
     });
   }
 
-  openUpdateFormModal() {
+  openUpdateFormModal(name: string, value: string, type: string) {
+    let updatedObj: Settings = {name: name, value: value, type:type};
     const modalRef = this.modalService.open(UpdateModalComponent);
-    modalRef.componentInstance.listOfSettings = this.listOfSettings;
+    modalRef.componentInstance.updateObj = updatedObj;
+    //modalRef.componentInstance.listOfSettings = this.listOfSettings;
 
     modalRef.componentInstance.passEntry.subscribe((receivedEntry) => {
       this.listOfSettings = receivedEntry;

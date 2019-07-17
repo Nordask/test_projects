@@ -11,7 +11,9 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./update-modal.component.css']
 })
 export class UpdateModalComponent implements OnInit {
-  @Input() listOfSettings: Settings[];
+  //@Input() listOfSettings: Settings[];
+  listOfSettings: Settings[];
+  @Input() updatedObj: Settings;
   @Output() passEntry: EventEmitter<Settings[]> = new EventEmitter();
   settingsForm: FormGroup;
   settingsData: Settings;
@@ -28,10 +30,11 @@ export class UpdateModalComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.settingsForm.controls['name'].setValue(this.listOfSettings[0].name);
-    this.settingsForm.controls['type'].setValue(this.listOfSettings[0].type);
-    this.settingsForm.controls['value'].setValue(this.listOfSettings[0].value);
-
+    console.log(this.updatedObj)
+    this.settingsForm.controls['name'].setValue(this.updatedObj.name);
+    this.settingsForm.controls['type'].setValue(this.updatedObj.type);
+    this.settingsForm.controls['value'].setValue(this.updatedObj.value);
+    /*
     this.settingsForm.get('name').valueChanges.subscribe(item => {
       let currSetting = this.listOfSettings.filter(setting => {
         return setting.name === item;
@@ -39,7 +42,8 @@ export class UpdateModalComponent implements OnInit {
       console.log(currSetting);
       this.settingsForm.controls['type'].setValue(currSetting[0].type);
       this.settingsForm.controls['value'].setValue(currSetting[0].value);
-    });
+      
+    });*/
 
     this.settingsForm.get('type').valueChanges.subscribe(item => {
       switch(item) {
