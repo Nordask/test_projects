@@ -4,7 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule, MatInputModule, MatCheckboxModule,
-  MatSelectModule, MatTableModule, MatSortModule} from "@angular/material";
+  MatSelectModule, MatTableModule, MatSortModule, MatIconModule} from "@angular/material";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -46,7 +46,8 @@ import { AuthGuardService } from './auth-guard.service';
     MatCheckboxModule,
     MatSelectModule,
     MatTableModule,
-    MatSortModule
+    MatSortModule,
+    MatIconModule
   ],
   providers: [SendFetchService, LoginService, AuthGuardService],
   bootstrap: [AppComponent],

@@ -17,13 +17,14 @@ export class SettingsComponent implements OnInit {
   settingsData: Settings;
   listOfSettings: Settings[];
   message: string; // if http request failed, information about fail will write at that var
-  displayedColumns: string[] = ['name', 'value', 'type'];
+  displayedColumns: string[] = ['name', 'value', 'type', 'actions'];
   dataSource;
 
   constructor(private sendFetchService: SendFetchService, private modalService: NgbModal) { }
 
   ngOnInit() {
     this.fetchSettingsData();
+    console.log(this.listOfSettings)
   }
 
   fetchSettingsData() {
@@ -59,9 +60,10 @@ export class SettingsComponent implements OnInit {
     });
   }
 
-  openDeleteFormModal() {
+  openDeleteFormModal(name: string) {
     const modalRef = this.modalService.open(DeleteModalComponent);
     modalRef.componentInstance.listOfSettings = this.listOfSettings;
+    modalRef.componentInstance.name = name;
     
     modalRef.componentInstance.passEntry.subscribe((receivedEntry) => {
       this.listOfSettings = receivedEntry;
