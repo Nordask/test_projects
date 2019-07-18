@@ -16,6 +16,7 @@ export class AddModalComponent implements OnInit{
   settingsForm: FormGroup;
   settingsData: Settings;
   message: string;
+  type: string;
 
   constructor(private activeModal: NgbActiveModal, private sendFetchService: SendFetchService) { 
     this.settingsForm = new FormGroup({
@@ -64,7 +65,7 @@ export class AddModalComponent implements OnInit{
         this.settingsData = {
           name: this.settingsForm.controls.name.value,
           value: this.settingsForm.controls.value.value,
-          type: this.settingsForm.controls.type.value
+          type: this.type
         }
 
         this.sendFetchService.sendData(this.settingsData, "settings", "add").subscribe((data) => {

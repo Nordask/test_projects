@@ -18,20 +18,20 @@ export class UpdateModalComponent implements OnInit {
   settingsForm: FormGroup;
   settingsData: Settings;
   selectedName: string;
-  selectedSetting: Settings;
   message: string;
 
   constructor(private activeModal: NgbActiveModal, private sendFetchService: SendFetchService) { 
     this.settingsForm = new FormGroup({
-      name: new FormControl("", [Validators.required]),
+      //name: new FormControl("", [Validators.required]),
       value: new FormControl("", [Validators.required]),
       type: new FormControl("", [Validators.required, Validators.pattern("^(Строка|Число|Дата)$")])
     });  
   }
 
   ngOnInit() {
-    console.log(this.updatedObj)
-    this.settingsForm.controls['name'].setValue(this.updatedObj.name);
+    console.log(this.updatedObj.name)
+    //this.settingsForm.controls['name'].setValue(this.updatedObj.name);
+    this.selectedName = this.updatedObj.name;
     this.settingsForm.controls['type'].setValue(this.updatedObj.type);
     this.settingsForm.controls['value'].setValue(this.updatedObj.value);
     /*
@@ -72,7 +72,7 @@ export class UpdateModalComponent implements OnInit {
   updateSetting() {
     if(this.settingsForm.valid == true) {
       this.settingsData = {
-        name: this.settingsForm.controls.name.value,
+        name: this.selectedName,
         value: this.settingsForm.controls.value.value,
         type: this.settingsForm.controls.type.value
       }

@@ -67,6 +67,7 @@ export class SettingsComponent implements OnInit {
     
     modalRef.componentInstance.passEntry.subscribe((receivedEntry) => {
       this.listOfSettings = receivedEntry;
+      this.dataSource= new MatTableDataSource(this.listOfSettings);
     });
 
     modalRef.result.then((result) => {
@@ -79,11 +80,12 @@ export class SettingsComponent implements OnInit {
   openUpdateFormModal(name: string, value: string, type: string) {
     let updatedObj: Settings = {name: name, value: value, type:type};
     const modalRef = this.modalService.open(UpdateModalComponent);
-    modalRef.componentInstance.updateObj = updatedObj;
+    modalRef.componentInstance.updatedObj = updatedObj;
     //modalRef.componentInstance.listOfSettings = this.listOfSettings;
 
     modalRef.componentInstance.passEntry.subscribe((receivedEntry) => {
       this.listOfSettings = receivedEntry;
+      this.dataSource= new MatTableDataSource(this.listOfSettings);
     });
     
     modalRef.result.then((result) => {

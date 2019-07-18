@@ -7,24 +7,30 @@
 <div class="modal-body">
   <form [formGroup]="settingsForm">
     <ul>
-      <li>  
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <label class="input-group-text" for="txtName">Название:</label>
-          </div>
-          <input type="text" id="txtName" formControlName="name">
-        </div>  
+      <li>
+        <mat-form-field>
+          <input matInput placeholder="Название" formControlName="name">
+        </mat-form-field>
       </li>
 
-      <li> 
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <label class="input-group-text" for="txtValue">Значение:</label>
-          </div>
-          <input type="text" id="txtValue" formControlName="value">
-        </div>  
+    
+      <li>
+        <mat-form-field>
+          <input matInput placeholder="Значение" formControlName="value">
+        </mat-form-field>
       </li>
     
+      <li>
+        <mat-form-field>
+          <mat-label>Select an option</mat-label>
+          <mat-select  formControlName="type">
+            <mat-option value="Строка">Строка</mat-option>
+            <mat-option value="Число">Число</mat-option>
+            <mat-option value="Дата">Дата</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </li>
+
       <li> 
         <div class="input-group mb-3">
           <div class="input-group-prepend">
