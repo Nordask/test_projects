@@ -1,8 +1,6 @@
 <div>
   <div>
     <button class="btn btn-success" (click)="openAddFormModal()">Добавить</button>
-    <button class="btn btn-danger" (click)="openDeleteFormModal()">Удалить</button>
-    <button class="btn btn-primary" (click)="openUpdateFormModal()">Обновить</button>
 
     <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
       <ng-container matColumnDef="name">
@@ -39,7 +37,7 @@
                   Start Recording
               </button-->
               <button md-raised-button (click)="openUpdateFormModal(element.name, element.value, element.type)">Обновить</button>
-              <button md-raised-button (click)="openDeleteFormModal(element.name)">Удалить</button> 
+              <button md-raised-button (click)="deleteSetting(element.name)">Удалить</button> 
           </td>
       </ng-container> 
       

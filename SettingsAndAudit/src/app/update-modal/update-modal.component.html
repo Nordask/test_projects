@@ -16,22 +16,21 @@
         {{selectedName}}
       </li>
 
-      <li> 
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <label class="input-group-text" for="txtValue">Значение:</label>
-          </div>
-          <input type="text" id="txtValue" formControlName="value">
-        </div> 
+      <li>
+        <mat-form-field>
+          <input matInput placeholder="Значение" formControlName="value">
+        </mat-form-field>
       </li>
 
-      <li> 
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <label class="input-group-text" for="txtType">Тип:</label>
-          </div>
-          <input type="text" id="txtType" formControlName="type">
-        </div> 
+      <li>
+        <mat-form-field>
+          <mat-label>Выберите тип настройки</mat-label>
+          <select matNativeControl required formControlName="type">
+            <option value="Строка">Строка</option>
+            <option value="Число">Число</option>
+            <option value="Дата">Дата</option>
+          </select>
+        </mat-form-field>
       </li>
     </ul>  
   </form>

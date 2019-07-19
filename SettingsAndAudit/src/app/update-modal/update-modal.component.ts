@@ -30,20 +30,9 @@ export class UpdateModalComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.updatedObj.name)
-    //this.settingsForm.controls['name'].setValue(this.updatedObj.name);
     this.selectedName = this.updatedObj.name;
     this.settingsForm.controls['type'].setValue(this.updatedObj.type);
     this.settingsForm.controls['value'].setValue(this.updatedObj.value);
-    /*
-    this.settingsForm.get('name').valueChanges.subscribe(item => {
-      let currSetting = this.listOfSettings.filter(setting => {
-        return setting.name === item;
-      });
-      console.log(currSetting);
-      this.settingsForm.controls['type'].setValue(currSetting[0].type);
-      this.settingsForm.controls['value'].setValue(currSetting[0].value);
-      
-    });*/
 
     this.settingsForm.get('type').valueChanges.subscribe(item => {
       switch(item) {
@@ -55,13 +44,13 @@ export class UpdateModalComponent implements OnInit {
 
         case 'Число':
             this.settingsForm.controls["value"].clearValidators();
-            this.settingsForm.controls["value"].setValidators([Validators.pattern("[0-9]*$")]);
+            this.settingsForm.controls["value"].setValidators([Validators.required, Validators.pattern("[0-9]*$")]);
             this.settingsForm.controls["value"].updateValueAndValidity();
         break;
 
         case 'Дата':
             this.settingsForm.controls["value"].clearValidators();
-            this.settingsForm.controls["value"].setValidators([Validators.pattern("^[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{4}$")]);
+            this.settingsForm.controls["value"].setValidators([Validators.required, Validators.pattern("^[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{4}$")]);
             this.settingsForm.controls["value"].updateValueAndValidity();
         break;
         default:

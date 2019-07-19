@@ -13,7 +13,6 @@ import { AuditComponent } from './audit/audit.component';
 import { SendFetchService } from './send-fetch.service';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { AddModalComponent } from './add-modal/add-modal.component';
-import { DeleteModalComponent } from './delete-modal/delete-modal.component';
 import { UpdateModalComponent } from './update-modal/update-modal.component';
 import { OrderByPipe } from './order-by.pipe';
 import { FilterPipe } from './filter.pipe';
@@ -27,7 +26,6 @@ import { AuthGuardService } from './auth-guard.service';
     SettingsComponent,
     AuditComponent,
     AddModalComponent,
-    DeleteModalComponent,
     UpdateModalComponent,
     OrderByPipe,
     FilterPipe,
@@ -53,7 +51,6 @@ import { AuthGuardService } from './auth-guard.service';
   bootstrap: [AppComponent],
   entryComponents: [
     AddModalComponent,
-    DeleteModalComponent,
     UpdateModalComponent]
 })
 export class AppModule { }

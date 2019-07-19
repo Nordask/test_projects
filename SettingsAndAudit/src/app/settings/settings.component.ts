@@ -61,21 +61,28 @@ export class SettingsComponent implements OnInit {
     });
   }
 
-  openDeleteFormModal(name: string) {
-    const modalRef = this.modalService.open(DeleteModalComponent);
-    modalRef.componentInstance.listOfSettings = this.listOfSettings;
-    modalRef.componentInstance.name = name;
+  deleteSetting(selectedName: string) {
+    let selectedSetting = {
+      name: selectedName,
+      value: "",
+      type: ""
+    }
     
-    modalRef.componentInstance.passEntry.subscribe((receivedEntry) => {
-      this.listOfSettings = receivedEntry;
-      this.dataSource= new MatTableDataSource(this.listOfSettings);
-    });
-
-    modalRef.result.then((result) => {
-      console.log(result);
-    }).catch((error) => {
-      console.log(error);
-    });
+    if(confirm("Вы уверены, что хотите удалить настроку " + selectedName)) {
+      this.sendFetchService.sendData(selectedSetting, "settings", "delete").subscribe((data) => {
+        this.message = null;
+        this.listOfSettings = Object.keys(data).map(i => data[i]);
+        this.dataSource = new MatTableDataSource(this.listOfSettings);
+      },
+      (err: HttpErrorResponse) => {
+        if(err instanceof Error) {
+          // client-side error
+          this.message = `An error occured ${err.error.message}`;
+        } else {
+          this.message = `Backend returned err code ${err.status}, body was: ${err.message}`;
+        }
+      });
+    }
   }
 
   openUpdateFormModal(name: string, value: string, type: string) {
@@ -94,10 +101,5 @@ export class SettingsComponent implements OnInit {
     }).catch((error) => {
       console.log(error);
     });
-  }
-
-  ngOnChanges() {
-    //console.log('qqqq');
-    //this.fetchSettingsData();
   }
 }
