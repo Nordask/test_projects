@@ -4,7 +4,6 @@ import { SendFetchService } from '../send-fetch.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddModalComponent } from '../add-modal/add-modal.component';
-import { DeleteModalComponent } from '../delete-modal/delete-modal.component';
 import { UpdateModalComponent } from '../update-modal/update-modal.component';
 import {MatTableDataSource} from '@angular/material/table';
 
