@@ -22,22 +22,13 @@
     
       <li>
         <mat-form-field>
-          <mat-label>Select an option</mat-label>
-          <mat-select  formControlName="type">
-            <mat-option value="Строка">Строка</mat-option>
-            <mat-option value="Число">Число</mat-option>
-            <mat-option value="Дата">Дата</mat-option>
-          </mat-select>
+          <mat-label>Выберите тип настройки</mat-label>
+          <select matNativeControl required formControlName="type">
+            <option value="Строка">Строка</option>
+            <option value="Число">Число</option>
+            <option value="Дата">Дата</option>
+          </select>
         </mat-form-field>
-      </li>
-
-      <li> 
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <label class="input-group-text" for="txtType">Тип:</label>
-          </div>
-          <input type="text" id="txtType" formControlName="type">
-        </div>  
       </li>
     </ul>  
   </form>

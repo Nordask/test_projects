@@ -16,7 +16,6 @@ export class AddModalComponent implements OnInit{
   settingsForm: FormGroup;
   settingsData: Settings;
   message: string;
-  type: string;
 
   constructor(private activeModal: NgbActiveModal, private sendFetchService: SendFetchService) { 
     this.settingsForm = new FormGroup({
@@ -28,7 +27,9 @@ export class AddModalComponent implements OnInit{
 
   ngOnInit() {
     console.log(this.listOfSettings);
+    
     this.settingsForm.get('type').valueChanges.subscribe(item => {
+      console.log(item)
       switch(item) {
         case 'Строка':
             this.settingsForm.controls["value"].clearValidators();
@@ -38,18 +39,19 @@ export class AddModalComponent implements OnInit{
 
         case 'Число':
             this.settingsForm.controls["value"].clearValidators();
-            this.settingsForm.controls["value"].setValidators([Validators.pattern("[0-9]*$")]);
+            this.settingsForm.controls["value"].setValidators([Validators.required, Validators.pattern("[0-9]*$")]);
             this.settingsForm.controls["value"].updateValueAndValidity();
         break;
 
         case 'Дата':
             this.settingsForm.controls["value"].clearValidators();
-            this.settingsForm.controls["value"].setValidators([Validators.pattern("^[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{4}$")]);
+            this.settingsForm.controls["value"].setValidators([Validators.required, Validators.pattern("^[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{4}$")]);
             this.settingsForm.controls["value"].updateValueAndValidity();
         break;
         default:
       }
     });
+    
   }
 
   addSetting() {
@@ -65,7 +67,7 @@ export class AddModalComponent implements OnInit{
         this.settingsData = {
           name: this.settingsForm.controls.name.value,
           value: this.settingsForm.controls.value.value,
-          type: this.type
+          type: this.settingsForm.controls.type.value
         }
 
         this.sendFetchService.sendData(this.settingsData, "settings", "add").subscribe((data) => {

@@ -51,6 +51,7 @@ export class SettingsComponent implements OnInit {
 
     modalRef.componentInstance.passEntry.subscribe((receivedEntry) => {
       this.listOfSettings = receivedEntry;
+      this.dataSource= new MatTableDataSource(this.listOfSettings);
     });
     
     modalRef.result.then((result) => {
