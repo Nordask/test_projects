@@ -4,7 +4,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule, MatInputModule, MatCheckboxModule,
-  MatSelectModule, MatTableModule, MatSortModule, MatIconModule} from "@angular/material";
+  MatSelectModule, MatTableModule, MatSortModule, MatIconModule, MatSidenavModule,
+  MatListModule} from "@angular/material";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,6 +20,9 @@ import { FilterPipe } from './filter.pipe';
 import { LoginComponent } from './login/login.component';
 import { LoginService } from './login.service';
 import { AuthGuardService } from './auth-guard.service';
+import { MainNavbarComponent } from './main-navbar/main-navbar.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
@@ -29,7 +33,8 @@ import { AuthGuardService } from './auth-guard.service';
     UpdateModalComponent,
     OrderByPipe,
     FilterPipe,
-    LoginComponent
+    LoginComponent,
+    MainNavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +50,11 @@ import { AuthGuardService } from './auth-guard.service';
     MatSelectModule,
     MatTableModule,
     MatSortModule,
-    MatIconModule
+    MatIconModule,
+    MatSidenavModule,
+    MatListModule,
+    LayoutModule,
+    MatToolbarModule
   ],
   providers: [SendFetchService, LoginService, AuthGuardService],
   bootstrap: [AppComponent],
