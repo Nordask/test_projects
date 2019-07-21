@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Settings } from '../Interfaces';
-import { SendFetchService } from '../send-fetch.service';
+import { Settings } from '../core/interfaces/SettingsInterface';
+import { SendFetchService } from '../core/services/send-fetch.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddModalComponent } from '../add-modal/add-modal.component';

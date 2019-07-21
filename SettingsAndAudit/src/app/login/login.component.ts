@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject, Output, EventEmitter } from '@angular/core';
-import { LoginService } from '../login.service';
+import {LoginService} from "../core/services/login.service";
 import { Router } from '@angular/router';
 
 
