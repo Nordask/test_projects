@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Settings } from '../core/interfaces/SettingsInterface';
+import { Settings } from '@core/interfaces/SettingsInterface';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { SendFetchService } from '../core/services/send-fetch.service';
+import { SendFetchService } from '@core/services/send-fetch.service';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({

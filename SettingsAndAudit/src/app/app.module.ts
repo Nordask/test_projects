@@ -8,17 +8,13 @@ import { MatButtonModule, MatInputModule, MatCheckboxModule,
   MatListModule} from "@angular/material";
 
 import { CoreModule } from './core/core.module';
+import { AuditModule } from '@modules/audit/audit.module';
+import { SettingsModule } from '@modules/settings/settings.module';
+import { LoginModule } from '@modules/login/login.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SettingsComponent } from './settings/settings.component';
-import { AuditComponent } from './audit/audit.component';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { AddModalComponent } from './add-modal/add-modal.component';
-import { UpdateModalComponent } from './update-modal/update-modal.component';
-import { OrderByPipe } from './order-by.pipe';
-import { FilterPipe } from './filter.pipe';
-import { LoginComponent } from './login/login.component';
 import { MainNavbarComponent } from './main-navbar/main-navbar.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -26,13 +22,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 @NgModule({
   declarations: [
     AppComponent,
-    SettingsComponent,
-    AuditComponent,
-    AddModalComponent,
-    UpdateModalComponent,
-    OrderByPipe,
-    FilterPipe,
-    LoginComponent,
     MainNavbarComponent
   ],
   imports: [
@@ -54,12 +43,12 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatListModule,
     LayoutModule,
     MatToolbarModule,
-    CoreModule
+    CoreModule,
+    AuditModule,
+    SettingsModule,
+    LoginModule
   ],
   providers: [],
-  bootstrap: [AppComponent],
-  entryComponents: [
-    AddModalComponent,
-    UpdateModalComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

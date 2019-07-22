@@ -1,5 +1,5 @@
-import { Component, OnInit, Inject, Output, EventEmitter } from '@angular/core';
-import {LoginService} from "../core/services/login.service";
+import { Component } from '@angular/core';
+import {LoginService} from "@core/services/login.service";
 import { Router } from '@angular/router';
 
 
@@ -22,7 +22,7 @@ export class LoginComponent {
         this.loggedService.isLoggednIn();
         this.router.navigate(['/settings']);
       } else {
-        this.message = "Invalid Login";
+        this.message = "Неверно введено имя пользователя и/или пароль.";
       }
     }
   }

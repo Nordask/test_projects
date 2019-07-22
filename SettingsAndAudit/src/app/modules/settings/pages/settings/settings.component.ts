@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Settings } from '../core/interfaces/SettingsInterface';
-import { SendFetchService } from '../core/services/send-fetch.service';
+import { Settings } from '@core/interfaces/SettingsInterface';
+import { SendFetchService } from '@core/services/send-fetch.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddModalComponent } from '../add-modal/add-modal.component';
@@ -67,7 +67,7 @@ export class SettingsComponent implements OnInit {
       type: ""
     }
     
-    if(confirm("Вы уверены, что хотите удалить настроку " + selectedName)) {
+    if(confirm("Вы уверены, что хотите удалить настройку " + selectedName)) {
       this.sendFetchService.sendData(selectedSetting, "settings", "delete").subscribe((data) => {
         this.message = null;
         this.listOfSettings = Object.keys(data).map(i => data[i]);
