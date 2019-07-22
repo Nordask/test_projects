@@ -25,9 +25,7 @@ export class AddModalComponent implements OnInit{
     });
   }
 
-  ngOnInit() {
-    console.log(this.listOfSettings);
-    
+  ngOnInit() { 
     this.settingsForm.get('type').valueChanges.subscribe(item => {
       console.log(item)
       switch(item) {

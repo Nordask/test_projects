@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { Audit } from '@core/interfaces/AuditInterface';
 import { SendFetchService } from '@core/services/send-fetch.service';
-import { HttpErrorResponse, HttpEventType, HttpResponse } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { FormControl } from "@angular/forms";

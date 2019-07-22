@@ -1,21 +1,26 @@
 <div id="loginDiv">
   <h4>Вход</h4>
   <form #loginForm="ngForm">
-    
     Имя пользователя: <input type="text" [(ngModel)]="login" [ngModelOptions]="{standalone: true}" 
     required="required" #controlEmail="ngModel">
     <span class="error" *ngIf="controlEmail.invalid && controlEmail.touched 
     && controlEmail.errors.required">Поле имя пользователя не заполнено</span>
+    
     <br>
 
     Пароль: <input type="password" [(ngModel)]="password" name="password" 
     required="required" #controlPassword="ngModel">
-    <br>
     <span class="error" *ngIf="controlPassword.invalid && controlPassword.touched 
     && controlPassword.errors.required">Поле пароль не заполнено</span>
 
-    <input type="button" class="btn btn-info" value="Вход" (click)="onLoginClick(loginForm)">
     <br>
+
+    <button type="button" mat-button color="accent" (click)="onLoginClick(loginForm)">
+      Вход
+    </button>
+
+    <br>
+
     {{message}}
   </form>
 </div>

@@ -1,12 +1,13 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" fixedInViewport
-
       mode="side"
       opened>
     <mat-nav-list>
-      <a mat-button routerLink="settings">Настройки</a>
-      <a mat-button routerLink="audit">Аудит</a>
-      <button mat-button *ngIf="isLogged" routerLink="login" id="logout" (click)="logout()">Выйти</button>
+      <a mat-button color="primary" routerLink="settings">Настройки</a>
+      <mat-divider></mat-divider>
+      <a mat-button color="primary" routerLink="audit">Аудит</a>
+      <mat-divider></mat-divider>
+      <button mat-button color="warn" *ngIf="isLogged" routerLink="login" id="logout" (click)="logout()">Выйти</button>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

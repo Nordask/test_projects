@@ -11,7 +11,6 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./update-modal.component.css']
 })
 export class UpdateModalComponent implements OnInit {
-  //@Input() listOfSettings: Settings[];
   listOfSettings: Settings[];
   @Input() updatedObj: Settings;
   @Output() passEntry: EventEmitter<Settings[]> = new EventEmitter();
@@ -22,7 +21,6 @@ export class UpdateModalComponent implements OnInit {
 
   constructor(private activeModal: NgbActiveModal, private sendFetchService: SendFetchService) { 
     this.settingsForm = new FormGroup({
-      //name: new FormControl("", [Validators.required]),
       value: new FormControl("", [Validators.required]),
       type: new FormControl("", [Validators.required, Validators.pattern("^(Строка|Число|Дата)$")])
     });  
