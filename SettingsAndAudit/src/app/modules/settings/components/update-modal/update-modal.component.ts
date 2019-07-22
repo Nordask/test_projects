@@ -27,7 +27,6 @@ export class UpdateModalComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.updatedObj.name)
     this.selectedName = this.updatedObj.name;
     this.settingsForm.controls['type'].setValue(this.updatedObj.type);
     this.settingsForm.controls['value'].setValue(this.updatedObj.value);

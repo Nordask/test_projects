@@ -5,6 +5,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddModalComponent } from '../add-modal/add-modal.component';
 import { UpdateModalComponent } from '../update-modal/update-modal.component';
+import { DeleteModalComponent } from '../delete-modal/delete-modal.component';
 import {MatTableDataSource} from '@angular/material/table';
 
 @Component({
@@ -60,28 +61,19 @@ export class SettingsComponent implements OnInit {
     });
   }
 
-  deleteSetting(selectedName: string) {
-    let selectedSetting = {
-      name: selectedName,
-      value: "",
-      type: ""
-    }
+  openDeleteFormModal(selectedName: string) {
+    const modalRef = this.modalService.open(DeleteModalComponent);
+    modalRef.componentInstance.name = selectedName;
     
-    if(confirm("Вы уверены, что хотите удалить настройку " + selectedName)) {
-      this.sendFetchService.sendData(selectedSetting, "settings", "delete").subscribe((data) => {
-        this.message = null;
-        this.listOfSettings = Object.keys(data).map(i => data[i]);
-        this.dataSource = new MatTableDataSource(this.listOfSettings);
-      },
-      (err: HttpErrorResponse) => {
-        if(err instanceof Error) {
-          // client-side error
-          this.message = `An error occured ${err.error.message}`;
-        } else {
-          this.message = `Backend returned err code ${err.status}, body was: ${err.message}`;
-        }
-      });
-    }
+    modalRef.componentInstance.passEntry.subscribe((receivedEntry) => {
+      this.listOfSettings = receivedEntry;
+      this.dataSource= new MatTableDataSource(this.listOfSettings);
+    });
+    
+    modalRef.result.then((result) => {
+    }).catch((error) => {
+      console.log(error);
+    });
   }
 
   openUpdateFormModal(name: string, value: string, type: string) {
@@ -96,7 +88,6 @@ export class SettingsComponent implements OnInit {
     });
     
     modalRef.result.then((result) => {
-      console.log(result);
     }).catch((error) => {
       console.log(error);
     });
