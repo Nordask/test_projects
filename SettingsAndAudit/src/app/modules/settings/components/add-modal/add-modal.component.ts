@@ -27,7 +27,6 @@ export class AddModalComponent implements OnInit{
 
   ngOnInit() { 
     this.settingsForm.get('type').valueChanges.subscribe(item => {
-      console.log(item)
       switch(item) {
         case 'Строка':
             this.settingsForm.controls["value"].clearValidators();

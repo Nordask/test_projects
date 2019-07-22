@@ -3,9 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatInputModule, MatCheckboxModule,
-  MatSelectModule, MatTableModule, MatSortModule, MatIconModule, MatSidenavModule,
-  MatListModule} from "@angular/material";
+import { MatButtonModule, MatSidenavModule, MatListModule, MatToolbarModule} from "@angular/material";
 
 import { CoreModule } from './core/core.module';
 import { AuditModule } from '@modules/audit/audit.module';
@@ -17,7 +15,6 @@ import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MainNavbarComponent } from './main-navbar/main-navbar.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
@@ -33,12 +30,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatButtonModule,
-    MatInputModule,
-    MatCheckboxModule,
-    MatSelectModule,
-    MatTableModule,
-    MatSortModule,
-    MatIconModule,
     MatSidenavModule,
     MatListModule,
     LayoutModule,

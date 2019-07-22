@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Audit } from '../interfaces/AuditInterface';
 import { Settings } from '../interfaces/SettingsInterface';
@@ -14,7 +14,6 @@ export class SendFetchService {
   sendData(data:Settings | Audit, fileName: string, operation: string) {
     const body = data;
     let params = new HttpParams().set('file', fileName).set('operation', operation);
-    console.log(body)
 
     //--------------------put data------------------------------------------------
 

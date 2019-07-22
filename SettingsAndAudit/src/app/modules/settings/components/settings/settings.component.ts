@@ -24,7 +24,6 @@ export class SettingsComponent implements OnInit {
 
   ngOnInit() {
     this.fetchSettingsData();
-    console.log(this.listOfSettings)
   }
 
   fetchSettingsData() {
@@ -55,7 +54,6 @@ export class SettingsComponent implements OnInit {
     });
     
     modalRef.result.then((result) => {
-      console.log(result);
     }).catch((error) => {
       console.log(error);
     });

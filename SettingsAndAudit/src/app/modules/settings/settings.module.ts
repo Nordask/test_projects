@@ -5,7 +5,7 @@ import {AddModalComponent} from '@modules/settings/components/add-modal/add-moda
 import {UpdateModalComponent} from '@modules/settings/components/update-modal/update-modal.component';
 import {DeleteModalComponent} from '@modules/settings/components/delete-modal/delete-modal.component';
 import {SettingsRoutingModule} from './settings.routing';
-import { MatButtonModule, MatInputModule, MatCheckboxModule, MatSelectModule, MatTableModule, MatIconModule, MatListModule} from "@angular/material";
+import { MatButtonModule, MatInputModule, MatSelectModule, MatTableModule, MatIconModule, MatListModule} from "@angular/material";
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
@@ -18,7 +18,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     SettingsRoutingModule,
     MatButtonModule,
     MatInputModule,
-    MatCheckboxModule,
     MatSelectModule,
     MatTableModule,
     MatIconModule,

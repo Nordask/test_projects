@@ -78,7 +78,6 @@ export class AuditComponent implements OnInit, AfterViewInit {
     this.sendFetchSrvice.fetchData('audit').subscribe(
       (data) => {
         this.listOfAudit = null;
-        console.log(data);
         this.listOfAudit = Object.keys(data).map(i => data[i]);
         this.dataSource= new MatTableDataSource(this.listOfAudit);
         this.dataSource.sort = this.sort;
