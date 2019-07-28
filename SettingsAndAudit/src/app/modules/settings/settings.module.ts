@@ -12,7 +12,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
   declarations: [SettingsComponent,
                  AddModalComponent,
                  UpdateModalComponent,
-                 DeleteModalComponent],
+                 DeleteModalComponent
+                ],
   imports: [
     CommonModule,
     SettingsRoutingModule,

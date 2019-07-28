@@ -3,11 +3,13 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { Setting } from '@core/classes/Setting';
 import { SendFetchService } from '@core/services/send-fetch.service';
+import { SettingsFormsService } from '@modules/settings/services/settings-forms.service';
 
 @Component({
   selector: 'app-add-modal',
   templateUrl: './add-modal.component.html',
-  styleUrls: ['./add-modal.component.css']
+  styleUrls: ['./add-modal.component.css'],
+  providers: [SettingsFormsService]
 })
 export class AddModalComponent implements OnInit{
   @Input() listOfSettings: Setting[];
@@ -16,42 +18,20 @@ export class AddModalComponent implements OnInit{
   settingsData: Setting;
   message: string;
 
-  constructor(private activeModal: NgbActiveModal, private sendFetchService: SendFetchService) { 
-    this.settingsForm = new FormGroup({
-      name: new FormControl("", [Validators.required]),
-      value: new FormControl("", [Validators.required]),
-      type: new FormControl("", [Validators.required, Validators.pattern("^(Строка|Число|Дата)$")])
-    });
+  constructor(private activeModal: NgbActiveModal,
+              private sendFetchService: SendFetchService,
+              private settingsFormsService: SettingsFormsService) { 
+    this.settingsForm = this.settingsFormsService.getAddSettingForm();
   }
 
   ngOnInit() { 
     this.settingsForm.get('type').valueChanges.subscribe(item => {
-      switch(item) {
-        case 'Строка':
-            this.settingsForm.controls["value"].clearValidators();
-            this.settingsForm.controls["value"].setValidators([Validators.required]);
-            this.settingsForm.controls["value"].updateValueAndValidity();
-        break;
-
-        case 'Число':
-            this.settingsForm.controls["value"].clearValidators();
-            this.settingsForm.controls["value"].setValidators([Validators.required, Validators.pattern("[0-9]*$")]);
-            this.settingsForm.controls["value"].updateValueAndValidity();
-        break;
-
-        case 'Дата':
-            this.settingsForm.controls["value"].clearValidators();
-            this.settingsForm.controls["value"].setValidators([Validators.required, Validators.pattern("^[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{4}$")]);
-            this.settingsForm.controls["value"].updateValueAndValidity();
-        break;
-        default:
-      }
+      this.settingsForm = this.settingsFormsService.switchValidation(item);  
     });
-    
   }
 
   addSetting() {
-    if(this.settingsForm.valid == true) {
+    if(this.settingsFormsService.isValid == true) {
       this.message = null;
       // Setting name must be unique
       let doubleCheck = this.listOfSettings.filter(item => {

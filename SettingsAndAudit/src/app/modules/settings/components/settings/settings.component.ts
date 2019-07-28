@@ -15,7 +15,6 @@ import {MatTableDataSource} from '@angular/material/table';
 export class SettingsComponent implements OnInit {
   settingsData: Setting;
   listOfSettings: Setting[];
-  message: string; // if http request failed, information about fail will write at that var
   displayedColumns: string[] = ['name', 'value', 'type', 'actions'];
   dataSource;
 

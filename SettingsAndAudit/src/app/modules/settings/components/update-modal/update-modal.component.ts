@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Setting } from '@core/classes/Setting';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { SendFetchService } from '@core/services/send-fetch.service';
+import { SettingsFormsService } from '@modules/settings/services/settings-forms.service';
 
 @Component({
   selector: 'app-update-modal',
@@ -17,11 +18,10 @@ export class UpdateModalComponent implements OnInit {
   settingsData: Setting;
   selectedName: string;
 
-  constructor(private activeModal: NgbActiveModal, private sendFetchService: SendFetchService) { 
-    this.settingsForm = new FormGroup({
-      value: new FormControl("", [Validators.required]),
-      type: new FormControl("", [Validators.required, Validators.pattern("^(Строка|Число|Дата)$")])
-    });  
+  constructor(private activeModal: NgbActiveModal, 
+              private sendFetchService: SendFetchService,
+              private settingsFormService: SettingsFormsService) { 
+    this.settingsForm = this.settingsFormService.getUpdateSettingForm();  
   }
 
   ngOnInit() {
@@ -30,31 +30,12 @@ export class UpdateModalComponent implements OnInit {
     this.settingsForm.controls['value'].setValue(this.updatedObj.value);
 
     this.settingsForm.get('type').valueChanges.subscribe(item => {
-      switch(item) {
-        case 'Строка':
-            this.settingsForm.controls["value"].clearValidators();
-            this.settingsForm.controls["value"].setValidators([Validators.required]);
-            this.settingsForm.controls["value"].updateValueAndValidity();
-        break;
-
-        case 'Число':
-            this.settingsForm.controls["value"].clearValidators();
-            this.settingsForm.controls["value"].setValidators([Validators.required, Validators.pattern("[0-9]*$")]);
-            this.settingsForm.controls["value"].updateValueAndValidity();
-        break;
-
-        case 'Дата':
-            this.settingsForm.controls["value"].clearValidators();
-            this.settingsForm.controls["value"].setValidators([Validators.required, Validators.pattern("^[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{4}$")]);
-            this.settingsForm.controls["value"].updateValueAndValidity();
-        break;
-        default:
-      }
+      this.settingsForm = this.settingsFormService.switchValidation(item);
     });
   }
 
   updateSetting() {
-    if(this.settingsForm.valid == true) {
+    if(this.settingsFormService.isValid == true) {
       this.settingsData = {
         name: this.selectedName,
         value: this.settingsForm.controls.value.value,
