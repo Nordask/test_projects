@@ -2,7 +2,6 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Setting } from '@core/classes/Setting';
 import { SendFetchService } from '@core/services/send-fetch.service';
-import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-delete-modal',
@@ -15,7 +14,6 @@ export class DeleteModalComponent{
   @Output() passEntry: EventEmitter<Setting[]> = new EventEmitter();
   selectedName: string;
   selectedSetting: Setting;
-  message: string;
 
   constructor(private activeModal: NgbActiveModal, private sendFetchService:SendFetchService) { }
 
@@ -23,17 +21,8 @@ export class DeleteModalComponent{
     this.selected();
     //if(confirm("Вы уверены, что хотите удалить настроку " + this.name)) {
     this.sendFetchService.sendData(this.selectedSetting, "settings", "delete").subscribe((data) => {
-      this.message = null;
-      this.listOfSettings = Object.keys(data).map(i => data[i]);
+      this.listOfSettings = <Setting[]>data;
       this.passEntry.emit(this.listOfSettings);
-    },
-    (err: HttpErrorResponse) => {
-      if(err instanceof Error) {
-        // client-side error
-        this.message = `An error occured ${err.error.message}`;
-      } else {
-        this.message = `Backend returned err code ${err.status}, body was: ${err.message}`;
-      }
     });
 
       this.activeModal.close('Modal Closed');

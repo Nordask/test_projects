@@ -3,7 +3,6 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Setting } from '@core/classes/Setting';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { SendFetchService } from '@core/services/send-fetch.service';
-import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-update-modal',
@@ -17,7 +16,6 @@ export class UpdateModalComponent implements OnInit {
   settingsForm: FormGroup;
   settingsData: Setting;
   selectedName: string;
-  message: string;
 
   constructor(private activeModal: NgbActiveModal, private sendFetchService: SendFetchService) { 
     this.settingsForm = new FormGroup({
@@ -63,17 +61,8 @@ export class UpdateModalComponent implements OnInit {
         type: this.settingsForm.controls.type.value
       }
       this.sendFetchService.sendData(this.settingsData, "settings", "update").subscribe((data) => {
-        this.message = null;
-        this.listOfSettings = Object.keys(data).map(i => data[i]);
+        this.listOfSettings = <Setting[]>data;
         this.passEntry.emit(this.listOfSettings);
-      },
-      (err: HttpErrorResponse) => {
-        if(err instanceof Error) {
-          // client-side error
-          this.message = `An error occured ${err.error.message}`;
-        } else {
-          this.message = `Backend returned err code ${err.status}, body was: ${err.message}`;
-        }
       });
 
       this.activeModal.close('Modal Closed');

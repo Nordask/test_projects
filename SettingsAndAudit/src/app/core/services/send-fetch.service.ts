@@ -13,13 +13,26 @@ export class SendFetchService {
 
   constructor(private http: HttpClient) {}
 
-  sendData(data:Setting | Audit, fileName: string, operation: string) {
+  sendData(data:Setting | Audit, fileName: string, operation: string): Observable<Setting[] | Audit[]> {
     const body = data;
     let params = new HttpParams().set('file', fileName).set('operation', operation);
 
     //--------------------put data------------------------------------------------
 
     return this.http.post('http://localhost:3000/post', body, {params: params})
+            .map(data => {
+              let listOfData: Setting[] | Audit = Object.keys(data).map(i => data[i]);
+              return listOfData;
+            })
+            .catch((err: HttpErrorResponse) => {
+              if(err instanceof Error) {
+                // client-side error
+                console.log(`An error occured ${err.error.message}`);
+              } else {
+                console.log(`Backend returned err code ${err.status}, body was: ${err.message}`);
+              } 
+              return [];
+            });
   }
 
   fetchData(fileName: string): Observable<Setting[] | Audit[]> { 

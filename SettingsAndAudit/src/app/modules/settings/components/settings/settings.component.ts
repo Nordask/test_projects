@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Setting } from '@core/classes/Setting';
 import { SendFetchService } from '@core/services/send-fetch.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { AddModalComponent } from '../add-modal/add-modal.component';
 import { UpdateModalComponent } from '../update-modal/update-modal.component';
 import { DeleteModalComponent } from '../delete-modal/delete-modal.component';
@@ -33,7 +33,10 @@ export class SettingsComponent implements OnInit {
   }
 
   openAddFormModal() {
-    const modalRef = this.modalService.open(AddModalComponent);
+    let modalOption: NgbModalOptions = {};
+    modalOption.backdrop = 'static';
+    modalOption.keyboard = false;
+    const modalRef = this.modalService.open(AddModalComponent, modalOption);
     modalRef.componentInstance.listOfSettings = this.listOfSettings;
 
     modalRef.componentInstance.passEntry.subscribe((receivedEntry) => {
@@ -48,7 +51,10 @@ export class SettingsComponent implements OnInit {
   }
 
   openDeleteFormModal(selectedName: string) {
-    const modalRef = this.modalService.open(DeleteModalComponent);
+    let modalOption: NgbModalOptions = {};
+    modalOption.backdrop = 'static';
+    modalOption.keyboard = false;
+    const modalRef = this.modalService.open(DeleteModalComponent, modalOption);
     modalRef.componentInstance.name = selectedName;
     
     modalRef.componentInstance.passEntry.subscribe((receivedEntry) => {
@@ -63,10 +69,12 @@ export class SettingsComponent implements OnInit {
   }
 
   openUpdateFormModal(name: string, value: string, type: string) {
+    let modalOption: NgbModalOptions = {};
+    modalOption.backdrop = 'static';
+    modalOption.keyboard = false;
     let updatedObj: Setting = {name: name, value: value, type:type};
-    const modalRef = this.modalService.open(UpdateModalComponent);
+    const modalRef = this.modalService.open(UpdateModalComponent, modalOption);
     modalRef.componentInstance.updatedObj = updatedObj;
-    //modalRef.componentInstance.listOfSettings = this.listOfSettings;
 
     modalRef.componentInstance.passEntry.subscribe((receivedEntry) => {
       this.listOfSettings = receivedEntry;
