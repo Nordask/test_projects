@@ -32,7 +32,7 @@ export class AuditComponent implements OnInit, AfterViewInit {
     description: ''
   };
 
-  constructor(private sendFetchSrvice: SendFetchService) { }
+  constructor(private sendFetchService: SendFetchService) { }
 
   column: string = 'dateTime';
   direction: number = 1;
@@ -75,23 +75,12 @@ export class AuditComponent implements OnInit, AfterViewInit {
   }
 
   fetchAuditData() {
-    this.sendFetchSrvice.fetchData('audit').subscribe(
-      (data) => {
-        this.listOfAudit = null;
-        this.listOfAudit = Object.keys(data).map(i => data[i]);
-        this.dataSource= new MatTableDataSource(this.listOfAudit);
-        this.dataSource.sort = this.sort;
-        this.dataSource.filterPredicate = this.tableFilter();
-      },
-      (err: HttpErrorResponse) => {
-        if(err instanceof Error) {
-          // client-side error
-          this.message = `An error occured ${err.error.message}`;
-        } else {
-          this.message = `Backend returned err code ${err.status}, body was: ${err.message}`;
-        }
-      }
-    );
+    this.sendFetchService.fetchData('audit').subscribe((data) => {
+      this.listOfAudit = <Audit[]>data;
+      this.dataSource= new MatTableDataSource(this.listOfAudit);
+      this.dataSource.sort = this.sort;
+      this.dataSource.filterPredicate = this.tableFilter();
+    });  
   }
 
   tableFilter(): (data: any, filter: string) => boolean {

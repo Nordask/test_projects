@@ -27,21 +27,10 @@ export class SettingsComponent implements OnInit {
   }
 
   fetchSettingsData() {
-    this.sendFetchService.fetchData('settings').subscribe(
-      (data) => {
-        this.message = null;
-        this.listOfSettings = Object.keys(data).map(i => data[i]);
-        this.dataSource= new MatTableDataSource(this.listOfSettings);
-      },
-      (err: HttpErrorResponse) => {
-        if(err instanceof Error) {
-          // client-side error
-          this.message = `An error occured ${err.error.message}`;
-        } else {
-          this.message = `Backend returned err code ${err.status}, body was: ${err.message}`;
-        }
-      }
-    );
+  this.sendFetchService.fetchData('settings').subscribe((data) => {
+      this.listOfSettings = <Settings[]>data;
+      this.dataSource= new MatTableDataSource(this.listOfSettings);
+    });
   }
 
   openAddFormModal() {
