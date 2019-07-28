@@ -3,8 +3,8 @@ import { HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http'
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-import { Audit } from '../interfaces/AuditInterface';
-import { Settings } from '../interfaces/SettingsInterface';
+import { Audit } from '../classes/Audit';
+import { Setting } from '../classes/Setting';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ export class SendFetchService {
 
   constructor(private http: HttpClient) {}
 
-  sendData(data:Settings | Audit, fileName: string, operation: string) {
+  sendData(data:Setting | Audit, fileName: string, operation: string) {
     const body = data;
     let params = new HttpParams().set('file', fileName).set('operation', operation);
 
@@ -22,14 +22,14 @@ export class SendFetchService {
     return this.http.post('http://localhost:3000/post', body, {params: params})
   }
 
-  fetchData(fileName: string): Observable<Settings[] | Audit[]> { 
+  fetchData(fileName: string): Observable<Setting[] | Audit[]> { 
   
     //---------------------get data-----------------------------------------------
     const params = new HttpParams().set('file', fileName);
 
-    return this.http.get<Settings[]|Audit[]>('http://localhost:3000/get', {params: params})
+    return this.http.get<Setting[]|Audit[]>('http://localhost:3000/get', {params: params})
             .map(data => {
-              let listOfData: Settings[] | Audit[] = Object.keys(data).map(i => data[i]);
+              let listOfData: Setting[] | Audit[] = Object.keys(data).map(i => data[i]);
               return listOfData;
             })
             .catch((err: HttpErrorResponse) => {

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Settings } from '@core/interfaces/SettingsInterface';
+import { Setting } from '@core/classes/Setting';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { SendFetchService } from '@core/services/send-fetch.service';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -11,11 +11,11 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./update-modal.component.css']
 })
 export class UpdateModalComponent implements OnInit {
-  listOfSettings: Settings[];
-  @Input() updatedObj: Settings;
-  @Output() passEntry: EventEmitter<Settings[]> = new EventEmitter();
+  listOfSettings: Setting[];
+  @Input() updatedObj: Setting;
+  @Output() passEntry: EventEmitter<Setting[]> = new EventEmitter();
   settingsForm: FormGroup;
-  settingsData: Settings;
+  settingsData: Setting;
   selectedName: string;
   message: string;
 

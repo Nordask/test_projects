@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Settings } from '@core/interfaces/SettingsInterface';
+import { Setting } from '@core/classes/Setting';
 import { SendFetchService } from '@core/services/send-fetch.service';
-import { HttpErrorResponse } from '@angular/common/http';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddModalComponent } from '../add-modal/add-modal.component';
 import { UpdateModalComponent } from '../update-modal/update-modal.component';
@@ -14,8 +13,8 @@ import {MatTableDataSource} from '@angular/material/table';
   styleUrls: ['./settings.component.css']
 })
 export class SettingsComponent implements OnInit {
-  settingsData: Settings;
-  listOfSettings: Settings[];
+  settingsData: Setting;
+  listOfSettings: Setting[];
   message: string; // if http request failed, information about fail will write at that var
   displayedColumns: string[] = ['name', 'value', 'type', 'actions'];
   dataSource;
@@ -28,7 +27,7 @@ export class SettingsComponent implements OnInit {
 
   fetchSettingsData() {
   this.sendFetchService.fetchData('settings').subscribe((data) => {
-      this.listOfSettings = <Settings[]>data;
+      this.listOfSettings = <Setting[]>data;
       this.dataSource= new MatTableDataSource(this.listOfSettings);
     });
   }
@@ -64,7 +63,7 @@ export class SettingsComponent implements OnInit {
   }
 
   openUpdateFormModal(name: string, value: string, type: string) {
-    let updatedObj: Settings = {name: name, value: value, type:type};
+    let updatedObj: Setting = {name: name, value: value, type:type};
     const modalRef = this.modalService.open(UpdateModalComponent);
     modalRef.componentInstance.updatedObj = updatedObj;
     //modalRef.componentInstance.listOfSettings = this.listOfSettings;

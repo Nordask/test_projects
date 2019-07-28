@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, Output,EventEmitter } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormControl, Validators } from "@angular/forms";
-import { Settings } from '@core/interfaces/SettingsInterface';
+import { Setting } from '@core/classes/Setting';
 import { SendFetchService } from '@core/services/send-fetch.service';
 import { HttpErrorResponse } from '@angular/common/http';
 
@@ -11,10 +11,10 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./add-modal.component.css']
 })
 export class AddModalComponent implements OnInit{
-  @Input() listOfSettings: Settings[];
-  @Output() passEntry: EventEmitter<Settings[]> = new EventEmitter();
+  @Input() listOfSettings: Setting[];
+  @Output() passEntry: EventEmitter<Setting[]> = new EventEmitter();
   settingsForm: FormGroup;
-  settingsData: Settings;
+  settingsData: Setting;
   message: string;
 
   constructor(private activeModal: NgbActiveModal, private sendFetchService: SendFetchService) { 

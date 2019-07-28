@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Settings } from '@core/interfaces/SettingsInterface';
+import { Setting } from '@core/classes/Setting';
 import { SendFetchService } from '@core/services/send-fetch.service';
 import { HttpErrorResponse } from '@angular/common/http';
 
@@ -12,9 +12,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class DeleteModalComponent{
   listOfSettings;
   @Input() name: string;
-  @Output() passEntry: EventEmitter<Settings[]> = new EventEmitter();
+  @Output() passEntry: EventEmitter<Setting[]> = new EventEmitter();
   selectedName: string;
-  selectedSetting: Settings;
+  selectedSetting: Setting;
   message: string;
 
   constructor(private activeModal: NgbActiveModal, private sendFetchService:SendFetchService) { }

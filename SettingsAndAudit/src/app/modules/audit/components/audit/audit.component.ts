@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { Audit } from '@core/interfaces/AuditInterface';
+import { Audit } from '@core/classes/Audit';
 import { SendFetchService } from '@core/services/send-fetch.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import {MatSort} from '@angular/material/sort';
