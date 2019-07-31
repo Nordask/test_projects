@@ -20,8 +20,8 @@ export class DeleteModalComponent{
   deleteSetting() {
     this.selected();
     //if(confirm("Вы уверены, что хотите удалить настроку " + this.name)) {
-    this.sendFetchService.sendData(this.selectedSetting, "settings", "delete").subscribe((data) => {
-      this.listOfSettings = <Setting[]>data;
+    this.sendFetchService.sendData<Setting>(this.selectedSetting, "settings", "delete").subscribe((data) => {
+      this.listOfSettings = data;
       this.passEntry.emit(this.listOfSettings);
     });
 

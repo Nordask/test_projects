@@ -1,10 +1,7 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Audit } from '@core/classes/Audit';
 import { SendFetchService } from '@core/services/send-fetch.service';
-import { HttpErrorResponse } from '@angular/common/http';
-import {MatSort} from '@angular/material/sort';
-import {MatTableDataSource} from '@angular/material/table';
-import { FormControl } from "@angular/forms";
+import {MatTableDataSource, MatSort } from '@angular/material';
 
 
 @Component({
@@ -12,18 +9,13 @@ import { FormControl } from "@angular/forms";
   templateUrl: './audit.component.html',
   styleUrls: ['./audit.component.css']
 })
-export class AuditComponent implements OnInit, AfterViewInit {
+export class AuditComponent implements OnInit {
   auditData: Audit;
   listOfAudit: Audit[] = [];
   message: string;
   displayedColumns: string[] = ['dateTime', 'host', 'event', 'description', 'result'];
   dataSource;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
-
-  dateTimeFilter = new FormControl('');
-  hostFilter = new FormControl('');
-  eventFilter = new FormControl('');
-  descriptionFilter = new FormControl('');
 
   filterValues = {
     dateTime: '',
@@ -38,45 +30,12 @@ export class AuditComponent implements OnInit, AfterViewInit {
   direction: number = 1;
 
   ngOnInit() {
-    this.fetchAuditData();
-
-    this.dateTimeFilter.valueChanges
-      .subscribe(
-        dateTime => {
-          this.filterValues.dateTime = dateTime;
-          this.dataSource.filter = JSON.stringify(this.filterValues);
-        }
-      )
-    this.hostFilter.valueChanges
-      .subscribe(
-        host => {
-          this.filterValues.host = host;
-          this.dataSource.filter = JSON.stringify(this.filterValues);
-        }
-      )
-    this.eventFilter.valueChanges
-      .subscribe(
-        event => {
-          this.filterValues.event = event;
-          this.dataSource.filter = JSON.stringify(this.filterValues);
-        }
-      )
-    this.descriptionFilter.valueChanges
-      .subscribe(
-        description => {
-          this.filterValues.description = description;
-          this.dataSource.filter = JSON.stringify(this.filterValues);
-        }
-      )   
-  }
-
-  ngAfterViewInit() {
-
+    this.fetchAuditData();   
   }
 
   fetchAuditData() {
-    this.sendFetchService.fetchData('audit').subscribe((data) => {
-      this.listOfAudit = <Audit[]>data;
+    this.sendFetchService.fetchData<Audit>('audit').subscribe((data) => {
+      this.listOfAudit = data;
       this.dataSource= new MatTableDataSource(this.listOfAudit);
       this.dataSource.sort = this.sort;
       this.dataSource.filterPredicate = this.tableFilter();
@@ -92,5 +51,10 @@ export class AuditComponent implements OnInit, AfterViewInit {
         && data.description.toLowerCase().indexOf(searchTerms.description) !== -1;
     }
     return filterFunction;
-  } 
+  }
+
+  doFilter(value:string, columnName: string) {
+    this.filterValues[columnName] = value;
+    this.dataSource.filter = JSON.stringify(this.filterValues);
+  }  
 }

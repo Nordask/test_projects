@@ -13,7 +13,7 @@ export class SendFetchService {
 
   constructor(private http: HttpClient) {}
 
-  sendData(data:Setting | Audit, fileName: string, operation: string): Observable<Setting[] | Audit[]> {
+  sendData<T>(data:T, fileName: string, operation: string): Observable<T[]> {
     const body = data;
     let params = new HttpParams().set('file', fileName).set('operation', operation);
 
@@ -21,7 +21,7 @@ export class SendFetchService {
 
     return this.http.post('http://localhost:3000/post', body, {params: params})
             .map(data => {
-              let listOfData: Setting[] | Audit = Object.keys(data).map(i => data[i]);
+              let listOfData: T[] = Object.keys(data).map(i => data[i]);
               return listOfData;
             })
             .catch((err: HttpErrorResponse) => {
@@ -35,14 +35,14 @@ export class SendFetchService {
             });
   }
 
-  fetchData(fileName: string): Observable<Setting[] | Audit[]> { 
+  fetchData<T>(fileName: string): Observable<T[]> { 
   
     //---------------------get data-----------------------------------------------
     const params = new HttpParams().set('file', fileName);
 
-    return this.http.get<Setting[]|Audit[]>('http://localhost:3000/get', {params: params})
+    return this.http.get<T[]>('http://localhost:3000/get', {params: params})
             .map(data => {
-              let listOfData: Setting[] | Audit[] = Object.keys(data).map(i => data[i]);
+              let listOfData: T[] = Object.keys(data).map(i => data[i]);
               return listOfData;
             })
             .catch((err: HttpErrorResponse) => {

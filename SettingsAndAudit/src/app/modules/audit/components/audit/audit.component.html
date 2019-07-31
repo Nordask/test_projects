@@ -4,8 +4,7 @@
       <th mat-header-cell *matHeaderCellDef mat-sort-header> 
         Дата и время 
         <mat-form-field class="filter" floatLabel="never">
-            <mat-label>Поиск...</mat-label>
-            <input matInput [formControl]="dateTimeFilter">
+          <input matInput (keyup)="doFilter($event.target.value, 'dateTime')" placeholder="Поиск...">
         </mat-form-field>
       </th>
       <td mat-cell *matCellDef="let element"> {{element.dateTime}} </td>
@@ -15,8 +14,7 @@
       <th mat-header-cell *matHeaderCellDef mat-sort-header> 
         Хост 
         <mat-form-field class="filter" floatLabel="never">
-            <mat-label>Поиск...</mat-label>
-            <input matInput [formControl]="hostFilter">
+            <input matInput (keyup)="doFilter($event.target.value, 'host')" placeholder="Поиск...">
         </mat-form-field>
       </th>
       <td mat-cell *matCellDef="let element"> {{element.host}} </td>
@@ -26,8 +24,7 @@
       <th mat-header-cell *matHeaderCellDef mat-sort-header> 
         Событие 
         <mat-form-field class="filter" floatLabel="never">
-            <mat-label>Поиск...</mat-label>
-            <input matInput [formControl]="eventFilter">
+            <input matInput (keyup)="doFilter($event.target.value, 'event')" placeholder="Поиск...">
         </mat-form-field>
       </th>
       <td mat-cell *matCellDef="let element"> {{element.event}} </td>
@@ -37,8 +34,7 @@
       <th mat-header-cell *matHeaderCellDef mat-sort-header> 
         Комментарий 
         <mat-form-field class="filter" floatLabel="never">
-            <mat-label>Поиск...</mat-label>
-            <input matInput [formControl]="descriptionFilter">
+            <input matInput (keyup)="doFilter($event.target.value, 'description')" placeholder="Поиск...">
         </mat-form-field>
       </th>
       <td mat-cell *matCellDef="let element"> {{element.description}} </td>

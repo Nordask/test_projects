@@ -25,7 +25,7 @@ export class SettingsComponent implements OnInit {
   }
 
   fetchSettingsData() {
-  this.sendFetchService.fetchData('settings').subscribe((data) => {
+  this.sendFetchService.fetchData<Setting>('settings').subscribe((data) => {
       this.listOfSettings = <Setting[]>data;
       this.dataSource= new MatTableDataSource(this.listOfSettings);
     });

@@ -6,21 +6,7 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 })
 export class SettingsFormsService {
   public form: FormGroup;
-  constructor() { 
-    /*
-    this.form = this.formBuild.group({
-      add: this.formBuild.group({
-        name: ["", Validators.required],
-        value: ["", Validators.required],
-        type: ["", Validators.required, Validators.pattern("^(Строка|Число|Дата)$")],
-      }),
-      update: this.formBuild.group({
-        value: ["", Validators.required],
-        type: ["", Validators.required, Validators.pattern("^(Строка|Число|Дата)$")],
-      })
-    })
-    */
-  }
+  constructor() { }
 
   getAddSettingForm(): FormGroup {
     this.form = new FormGroup({

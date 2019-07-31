@@ -41,8 +41,8 @@ export class UpdateModalComponent implements OnInit {
         value: this.settingsForm.controls.value.value,
         type: this.settingsForm.controls.type.value
       }
-      this.sendFetchService.sendData(this.settingsData, "settings", "update").subscribe((data) => {
-        this.listOfSettings = <Setting[]>data;
+      this.sendFetchService.sendData<Setting>(this.settingsData, "settings", "update").subscribe((data) => {
+        this.listOfSettings = data;
         this.passEntry.emit(this.listOfSettings);
       });
 

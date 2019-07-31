@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {AuditComponent} from '@modules/audit/components/audit/audit.component';
 import {AuditRoutingModule} from './audit.routing';
-import { MatButtonModule, MatInputModule, MatTableModule, MatSortModule, MatIconModule, MatListModule} from '@angular/material';
+import { MatButtonModule, MatInputModule, MatTableModule, MatSortModule, MatIconModule, MatListModule, MatFormFieldModule} from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
@@ -17,7 +17,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     MatIconModule,
     MatListModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatFormFieldModule
   ]
 })
 export class AuditModule { }

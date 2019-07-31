@@ -46,8 +46,8 @@ export class AddModalComponent implements OnInit{
           type: this.settingsForm.controls.type.value
         }
 
-        this.sendFetchService.sendData(this.settingsData, "settings", "add").subscribe((data) => {
-          this.listOfSettings = <Setting[]>data;
+        this.sendFetchService.sendData<Setting>(this.settingsData, "settings", "add").subscribe((data) => {
+          this.listOfSettings = data;
           this.passEntry.emit(this.listOfSettings);
         });
         this.activeModal.close('Modal Closed');
