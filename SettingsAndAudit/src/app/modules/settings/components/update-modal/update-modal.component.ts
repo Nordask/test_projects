@@ -18,7 +18,7 @@ export class UpdateModalComponent implements OnInit {
   settingsData: Setting;
   selectedName: string;
 
-  constructor(private activeModal: NgbActiveModal, 
+  constructor(public activeModal: NgbActiveModal, 
               private sendFetchService: SendFetchService,
               private settingsFormService: SettingsFormsService) { 
     this.settingsForm = this.settingsFormService.getUpdateSettingForm();  

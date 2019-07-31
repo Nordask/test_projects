@@ -15,7 +15,7 @@ export class DeleteModalComponent{
   selectedName: string;
   selectedSetting: Setting;
 
-  constructor(private activeModal: NgbActiveModal, private sendFetchService:SendFetchService) { }
+  constructor(public activeModal: NgbActiveModal, private sendFetchService:SendFetchService) { }
 
   deleteSetting() {
     this.selected();

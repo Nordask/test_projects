@@ -26,7 +26,7 @@ import { LayoutModule } from '@angular/cdk/layout';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    NgbModule.forRoot(),
+    NgbModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatButtonModule,

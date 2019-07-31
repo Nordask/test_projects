@@ -18,7 +18,7 @@ export class AddModalComponent implements OnInit{
   settingsData: Setting;
   message: string;
 
-  constructor(private activeModal: NgbActiveModal,
+  constructor(public activeModal: NgbActiveModal,
               private sendFetchService: SendFetchService,
               private settingsFormsService: SettingsFormsService) { 
     this.settingsForm = this.settingsFormsService.getAddSettingForm();
