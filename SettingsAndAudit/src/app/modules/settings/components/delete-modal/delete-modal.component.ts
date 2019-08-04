@@ -1,21 +1,27 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Component, EventEmitter, Inject, OnInit } from '@angular/core';
 import { Setting } from '@core/classes/Setting';
 import { SendFetchService } from '@core/services/send-fetch.service';
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
 
 @Component({
   selector: 'app-delete-modal',
   templateUrl: './delete-modal.component.html',
   styleUrls: ['./delete-modal.component.css']
 })
-export class DeleteModalComponent{
+export class DeleteModalComponent implements OnInit{
   listOfSettings;
-  @Input() name: string;
-  @Output() passEntry: EventEmitter<Setting[]> = new EventEmitter();
+  name: string;
+  passEntry: EventEmitter<Setting[]> = new EventEmitter();
   selectedName: string;
   selectedSetting: Setting;
 
-  constructor(public activeModal: NgbActiveModal, private sendFetchService:SendFetchService) { }
+  constructor(private dialogRef: MatDialogRef<DeleteModalComponent>,
+              private sendFetchService:SendFetchService,
+              @Inject(MAT_DIALOG_DATA) public data: string) { }
+
+  ngOnInit() {
+    this.name = this.data;
+  }
 
   deleteSetting() {
     this.selected();
@@ -25,8 +31,7 @@ export class DeleteModalComponent{
       this.passEntry.emit(this.listOfSettings);
     });
 
-      this.activeModal.close('Modal Closed');
-
+      this.dialogRef.close();
   }
 
   selected() {
@@ -38,6 +43,6 @@ export class DeleteModalComponent{
   }
 
   cancel() {
-    this.activeModal.close('Modal Closed');  
+    this.dialogRef.close(); 
   }
 }

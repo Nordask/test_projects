@@ -1,9 +1,9 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component, OnInit, EventEmitter, Inject } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { Setting } from '@core/classes/Setting';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { SendFetchService } from '@core/services/send-fetch.service';
 import { SettingsFormsService } from '@modules/settings/services/settings-forms.service';
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
 
 @Component({
   selector: 'app-update-modal',
@@ -12,22 +12,23 @@ import { SettingsFormsService } from '@modules/settings/services/settings-forms.
 })
 export class UpdateModalComponent implements OnInit {
   listOfSettings: Setting[];
-  @Input() updatedObj: Setting;
-  @Output() passEntry: EventEmitter<Setting[]> = new EventEmitter();
+  passEntry: EventEmitter<Setting[]> = new EventEmitter();
   settingsForm: FormGroup;
   settingsData: Setting;
   selectedName: string;
 
-  constructor(public activeModal: NgbActiveModal, 
+  constructor(private dialogRef: MatDialogRef<UpdateModalComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: Setting,
               private sendFetchService: SendFetchService,
               private settingsFormService: SettingsFormsService) { 
     this.settingsForm = this.settingsFormService.getUpdateSettingForm();  
   }
 
   ngOnInit() {
-    this.selectedName = this.updatedObj.name;
-    this.settingsForm.controls['type'].setValue(this.updatedObj.type);
-    this.settingsForm.controls['value'].setValue(this.updatedObj.value);
+    this.selectedName = this.data.name;
+    this.settingsForm.controls['type'].setValue(this.data.type);
+    this.settingsForm.controls['value'].setValue(this.data.value);
+    this.settingsFormService.switchValidation(this.settingsForm.get('type').value);
 
     this.settingsForm.get('type').valueChanges.subscribe(item => {
       this.settingsForm = this.settingsFormService.switchValidation(item);
@@ -46,11 +47,11 @@ export class UpdateModalComponent implements OnInit {
         this.passEntry.emit(this.listOfSettings);
       });
 
-      this.activeModal.close('Modal Closed');
+      this.dialogRef.close();
     }  
   }
  
-  closeModal() {
-    this.activeModal.close('Modal Closed');
+  close() {
+    this.dialogRef.close();
   }
 }

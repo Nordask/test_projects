@@ -1,44 +1,38 @@
-<div class="modal-header">
-  <h4 class="modal-title">Новая настройка</h4>
-  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-<div class="modal-body">
-  <form [formGroup]="settingsForm">
-    <ul>
-      <li>
-        <mat-form-field>
-          <input matInput placeholder="Название" formControlName="name">
-        </mat-form-field>
-      </li>
+<h4 mat-dialog-title>Новая настройка</h4>
 
-    
-      <li>
-        <mat-form-field>
-          <input matInput placeholder="Значение" formControlName="value">
-        </mat-form-field>
-      </li>
-    
-      <li>
-        <mat-form-field>
-          <mat-label>Выберите тип настройки</mat-label>
-          <select matNativeControl required formControlName="type">
-            <option value="Строка">Строка</option>
-            <option value="Число">Число</option>
-            <option value="Дата">Дата</option>
-          </select>
-        </mat-form-field>
-      </li>
-    </ul>  
-  </form>
+<mat-dialog-content [formGroup]="settingsForm">
+  <ul>
+    <li>
+      <mat-form-field>
+        <input matInput placeholder="Название" formControlName="name">
+      </mat-form-field>
+    </li>
 
+  
+    <li>
+      <mat-form-field>
+        <input matInput placeholder="Значение" formControlName="value">
+      </mat-form-field>
+    </li>
+  
+    <li>
+      <mat-form-field>
+        <mat-label>Выберите тип настройки</mat-label>
+        <select matNativeControl required formControlName="type">
+          <option value="Строка">Строка</option>
+          <option value="Число">Число</option>
+          <option value="Дата">Дата</option>
+        </select>
+      </mat-form-field>
+    </li>
+  </ul>
+  
   <div *ngIf="message">
     {{message}}
   </div>
-</div>
-<div class="modal-footer">
-  <button button mat-button color="primary" (click)="addSetting()">
-    Добавить настройку
-  </button>
-</div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button class="mat-raised-button mat-primary"(click)="addSetting()">Добавить настройку</button>
+  <button class="mat-raised-button"(click)="close()">Закрыть</button>
+</mat-dialog-actions>

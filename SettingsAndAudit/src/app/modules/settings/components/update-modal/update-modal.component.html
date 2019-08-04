@@ -1,37 +1,31 @@
-<div class="modal-header">
-  <h4 class="modal-title">Обновить настройку</h4>
-  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-<div class="modal-body">
-  <form [formGroup]="settingsForm">
-    <ul>
-      <li>
-        {{selectedName}}
-      </li>
+<h4 mat-dialog-title>Обновить настройку</h4>
 
-      <li>
-        <mat-form-field>
-          <input matInput placeholder="Значение" formControlName="value">
-        </mat-form-field>
-      </li>
+<mat-dialog-content [formGroup]="settingsForm">
+  <ul>
+    <li>
+      {{selectedName}}
+    </li>
 
-      <li>
-        <mat-form-field>
-          <mat-label>Выберите тип настройки</mat-label>
-          <select matNativeControl required formControlName="type">
-            <option value="Строка">Строка</option>
-            <option value="Число">Число</option>
-            <option value="Дата">Дата</option>
-          </select>
-        </mat-form-field>
-      </li>
-    </ul>  
-  </form>
-</div>
-<div class="modal-footer">
-  <button button mat-button color="primary" (click)="updateSetting()">
-    Обновить настройку
-  </button>
-</div>
+    <li>
+      <mat-form-field>
+        <input matInput placeholder="Значение" formControlName="value">
+      </mat-form-field>
+    </li>
+
+    <li>
+      <mat-form-field>
+        <mat-label>Выберите тип настройки</mat-label>
+        <select matNativeControl required formControlName="type">
+          <option value="Строка">Строка</option>
+          <option value="Число">Число</option>
+          <option value="Дата">Дата</option>
+        </select>
+      </mat-form-field>
+    </li>
+  </ul>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button class="mat-raised-button mat-primary"(click)="updateSetting()">Обновить настройку</button>
+  <button class="mat-raised-button"(click)="close()">Закрыть</button> 
+</mat-dialog-actions>

@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule, MatSidenavModule, MatListModule, MatToolbarModule} from "@angular/material";
 
@@ -26,7 +25,6 @@ import { LayoutModule } from '@angular/cdk/layout';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    NgbModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatButtonModule,

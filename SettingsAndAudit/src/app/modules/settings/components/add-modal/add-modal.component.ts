@@ -1,9 +1,9 @@
-import { Component, Input, OnInit, Output,EventEmitter } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { Component, OnInit, EventEmitter, Inject } from '@angular/core';
+import { FormGroup } from "@angular/forms";
 import { Setting } from '@core/classes/Setting';
 import { SendFetchService } from '@core/services/send-fetch.service';
 import { SettingsFormsService } from '@modules/settings/services/settings-forms.service';
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
 
 @Component({
   selector: 'app-add-modal',
@@ -12,19 +12,21 @@ import { SettingsFormsService } from '@modules/settings/services/settings-forms.
   providers: [SettingsFormsService]
 })
 export class AddModalComponent implements OnInit{
-  @Input() listOfSettings: Setting[];
-  @Output() passEntry: EventEmitter<Setting[]> = new EventEmitter();
+  listOfSettings: Setting[];
+  passEntry: EventEmitter<Setting[]> = new EventEmitter();
   settingsForm: FormGroup;
   settingsData: Setting;
   message: string;
 
-  constructor(public activeModal: NgbActiveModal,
+  constructor(private dialogRef: MatDialogRef<AddModalComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: Setting[],
               private sendFetchService: SendFetchService,
               private settingsFormsService: SettingsFormsService) { 
     this.settingsForm = this.settingsFormsService.getAddSettingForm();
   }
 
-  ngOnInit() { 
+  ngOnInit() {
+    this.listOfSettings = this.data;
     this.settingsForm.get('type').valueChanges.subscribe(item => {
       this.settingsForm = this.settingsFormsService.switchValidation(item);  
     });
@@ -50,12 +52,12 @@ export class AddModalComponent implements OnInit{
           this.listOfSettings = data;
           this.passEntry.emit(this.listOfSettings);
         });
-        this.activeModal.close('Modal Closed');
+        this.dialogRef.close();
       }  
     }    
   }
  
-  closeModal() {
-    this.activeModal.close('Modal Closed');
+  close() {
+    this.dialogRef.close();
   }
 }
