@@ -1,26 +1,36 @@
 <div id="loginDiv">
-  <h4>Вход</h4>
-  <form #loginForm="ngForm">
-    Имя пользователя: <input type="text" [(ngModel)]="login" [ngModelOptions]="{standalone: true}" 
-    required="required" #controlEmail="ngModel">
-    <span class="error" *ngIf="controlEmail.invalid && controlEmail.touched 
-    && controlEmail.errors.required">Поле имя пользователя не заполнено</span>
-    
-    <br>
-
-    Пароль: <input type="password" [(ngModel)]="password" name="password" 
-    required="required" #controlPassword="ngModel">
-    <span class="error" *ngIf="controlPassword.invalid && controlPassword.touched 
+  <mat-card>
+      <mat-card-header>
+        <mat-card-title>Вход</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form #loginForm="ngForm">
+          <div class="container">
+            <div class="row">
+              <mat-form-field class="col-6">
+                <input matInput placeholder="Имя пользователя" [(ngModel)]="login" name="login" required [ngModelOptions]="{standalone: true}" 
+                #controlLogin="ngModel">
+              </mat-form-field>
+              <span class="error col-6" *ngIf="controlLogin.invalid && controlLogin.touched 
+    && controlLogin.errors.required">Поле имя пользователя не заполнено</span>
+            </div>
+            <div class="row">
+              <mat-form-field class="col-6">
+                <input matInput placeholder="Пароль" [(ngModel)]="password" type="password" name="password" required #controlPassword="ngModel">
+              </mat-form-field>
+              <span class="error col-6" *ngIf="controlPassword.invalid && controlPassword.touched 
     && controlPassword.errors.required">Поле пароль не заполнено</span>
-
-    <br>
-
-    <button type="button" mat-button color="accent" (click)="onLoginClick(loginForm)">
-      Вход
-    </button>
-
-    <br>
-
-    {{message}}
-  </form>
+            </div>
+            <div *ngIf="message" class="row">
+              <div class="col">
+                {{message}}
+              </div>   
+            </div>
+          </div>
+        </form>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button (click)="onLoginClick(loginForm)" color="accent">Вход</button>
+      </mat-card-actions>
+    </mat-card>
 </div>

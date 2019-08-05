@@ -1,22 +1,18 @@
 <h4 mat-dialog-title>Новая настройка</h4>
 
 <mat-dialog-content [formGroup]="settingsForm">
-  <ul>
-    <li>
-      <mat-form-field>
+  <div class="container">
+    <div class="row">
+      <mat-form-field class="col-6">
         <input matInput placeholder="Название" formControlName="name">
       </mat-form-field>
-    </li>
 
-  
-    <li>
-      <mat-form-field>
+      <mat-form-field class="col-6">
         <input matInput placeholder="Значение" formControlName="value">
       </mat-form-field>
-    </li>
-  
-    <li>
-      <mat-form-field>
+    </div>
+    <div class="row">
+      <mat-form-field class="col-6">
         <mat-label>Выберите тип настройки</mat-label>
         <select matNativeControl required formControlName="type">
           <option value="Строка">Строка</option>
@@ -24,11 +20,11 @@
           <option value="Дата">Дата</option>
         </select>
       </mat-form-field>
-    </li>
-  </ul>
-  
-  <div *ngIf="message">
-    {{message}}
+
+      <div *ngIf="message" class="col-6">
+        {{message}}
+      </div>
+    </div>
   </div>
 </mat-dialog-content>
 

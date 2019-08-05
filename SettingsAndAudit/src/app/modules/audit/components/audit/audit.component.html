@@ -2,40 +2,80 @@
   <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
     <ng-container matColumnDef="dateTime">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> 
-        Дата и время 
-        <mat-form-field class="filter" floatLabel="never">
-          <input matInput (keyup)="doFilter($event.target.value, 'dateTime')" placeholder="Поиск...">
-        </mat-form-field>
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="filter" floatLabel="never">
+                <input matInput (keyup)="doFilter($event.target.value, 'dateTime')" placeholder="Поиск...">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              Дата и время   
+            </div>
+          </div>
+        </div>
       </th>
       <td mat-cell *matCellDef="let element"> {{element.dateTime}} </td>
     </ng-container>
 
     <ng-container matColumnDef="host">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> 
-        Хост 
-        <mat-form-field class="filter" floatLabel="never">
-            <input matInput (keyup)="doFilter($event.target.value, 'host')" placeholder="Поиск...">
-        </mat-form-field>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="filter" floatLabel="never">
+                <input matInput (keyup)="doFilter($event.target.value, 'host')" placeholder="Поиск...">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              Хост   
+            </div>
+          </div>
+        </div>        
       </th>
       <td mat-cell *matCellDef="let element"> {{element.host}} </td>
     </ng-container>
 
     <ng-container matColumnDef="event">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> 
-        Событие 
-        <mat-form-field class="filter" floatLabel="never">
-            <input matInput (keyup)="doFilter($event.target.value, 'event')" placeholder="Поиск...">
-        </mat-form-field>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="filter" floatLabel="never">
+                <input matInput (keyup)="doFilter($event.target.value, 'event')" placeholder="Поиск...">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              Событие   
+            </div>
+          </div>
+        </div>   
       </th>
       <td mat-cell *matCellDef="let element"> {{element.event}} </td>
     </ng-container>
 
     <ng-container matColumnDef="description">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> 
-        Комментарий 
-        <mat-form-field class="filter" floatLabel="never">
-            <input matInput (keyup)="doFilter($event.target.value, 'description')" placeholder="Поиск...">
-        </mat-form-field>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="filter" floatLabel="never">
+                <input matInput (keyup)="doFilter($event.target.value, 'description')" placeholder="Поиск...">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              Комментарий  
+            </div>
+          </div>
+        </div>   
       </th>
       <td mat-cell *matCellDef="let element"> {{element.description}} </td>
     </ng-container>
