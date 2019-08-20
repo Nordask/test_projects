@@ -7,6 +7,6 @@
   background: inherit;
 }
 
-a, button {
+.sideButton {
   min-width: 100%;
 }

@@ -1,28 +1,28 @@
 <h4 mat-dialog-title>Обновить настройку</h4>
 
 <mat-dialog-content [formGroup]="settingsForm">
-  <div class="container">
-    <div class="row">
-      <div class="col-6">
-        {{selectedName}}
-      </div>
+  
+  <div class="row">
+    <div class="col-6">
+      {{selectedName}}
+    </div>
       
-      <mat-form-field class="col-6">
-          <input matInput placeholder="Значение" formControlName="value">
-      </mat-form-field>
-    </div>
-    
-    <div class="row">
-      <mat-form-field class="col">
-        <mat-label>Выберите тип настройки</mat-label>
-        <select matNativeControl required formControlName="type">
-          <option value="Строка">Строка</option>
-          <option value="Число">Число</option>
-          <option value="Дата">Дата</option>
-        </select>
-      </mat-form-field>
-    </div>
+    <mat-form-field class="col-6">
+      <input matInput placeholder="Значение" formControlName="value">
+    </mat-form-field>
   </div>
+    
+  <div class="row">
+    <mat-form-field class="col">
+      <mat-label>Выберите тип настройки</mat-label>
+      <select matNativeControl required formControlName="type">
+        <option value="Строка">Строка</option>
+        <option value="Число">Число</option>
+        <option value="Дата">Дата</option>
+      </select>
+    </mat-form-field>
+  </div>
+
 </mat-dialog-content>
 
 <mat-dialog-actions>

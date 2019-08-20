@@ -1,31 +1,32 @@
 <h4 mat-dialog-title>Новая настройка</h4>
 
 <mat-dialog-content [formGroup]="settingsForm">
-  <div class="container">
-    <div class="row">
-      <mat-form-field class="col-6">
-        <input matInput placeholder="Название" formControlName="name">
-      </mat-form-field>
+  
+  <div class="row">
+    <mat-form-field class="col-6">
+      <input matInput placeholder="Название" formControlName="name">
+    </mat-form-field>
 
-      <mat-form-field class="col-6">
-        <input matInput placeholder="Значение" formControlName="value">
-      </mat-form-field>
-    </div>
-    <div class="row">
-      <mat-form-field class="col-6">
-        <mat-label>Выберите тип настройки</mat-label>
-        <select matNativeControl required formControlName="type">
-          <option value="Строка">Строка</option>
-          <option value="Число">Число</option>
-          <option value="Дата">Дата</option>
-        </select>
-      </mat-form-field>
+    <mat-form-field class="col-6">
+      <input matInput placeholder="Значение" formControlName="value">
+    </mat-form-field>
+  </div>
 
-      <div *ngIf="message" class="col-6">
-        {{message}}
-      </div>
+  <div class="row">
+    <mat-form-field class="col-6">
+      <mat-label>Выберите тип настройки</mat-label>
+      <select matNativeControl required formControlName="type">
+        <option value="Строка">Строка</option>
+        <option value="Число">Число</option>
+        <option value="Дата">Дата</option>
+      </select>
+    </mat-form-field>
+
+    <div *ngIf="message" class="col-6">
+      {{message}}
     </div>
   </div>
+  
 </mat-dialog-content>
 
 <mat-dialog-actions>

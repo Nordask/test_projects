@@ -3,15 +3,14 @@
       mode="side"
       opened>
     <mat-nav-list>
-      <a mat-button color="primary" routerLink="settings">Настройки</a>
+      <a class="sideButton" mat-button color="primary" routerLink="settings">Настройки</a>
       <mat-divider></mat-divider>
-      <a mat-button color="primary" routerLink="audit">Аудит</a>
+      <a class="sideButton" mat-button color="primary" routerLink="audit">Аудит</a>
       <mat-divider></mat-divider>
-      <button mat-button color="warn" *ngIf="isLogged" routerLink="login" id="logout" (click)="logout()">Выйти</button>
+      <button class="sideButton" mat-button color="warn" *ngIf="isLogged" routerLink="login" id="logout" (click)="logout()">Выйти</button>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-   
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
