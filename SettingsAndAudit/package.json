@@ -28,7 +28,7 @@
     "datatables.net": "^1.10.19",
     "datatables.net-dt": "^1.10.19",
     "hammerjs": "^2.0.8",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "nodemon": "^1.19.1",
     "rxjs": "^6.5.2",
     "rxjs-compat": "^6.5.2",
